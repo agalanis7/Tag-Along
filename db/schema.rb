@@ -37,9 +37,13 @@ ActiveRecord::Schema.define(version: 2018_11_08_214715) do
     t.integer "quantity"
     t.string "notification"
     t.bigint "location_id"
+    t.bigint "user_id"
+    t.bigint "participant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_events_on_location_id"
+    t.index ["participant_id"], name: "index_events_on_participant_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -77,15 +81,6 @@ ActiveRecord::Schema.define(version: 2018_11_08_214715) do
     t.index ["user_id"], name: "index_user_activities_on_user_id"
   end
 
-  create_table "user_events", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_user_events_on_event_id"
-    t.index ["user_id"], name: "index_user_events_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -101,9 +96,9 @@ ActiveRecord::Schema.define(version: 2018_11_08_214715) do
   add_foreign_key "activity_locations", "activities"
   add_foreign_key "activity_locations", "locations"
   add_foreign_key "events", "locations"
+  add_foreign_key "events", "users"
+  add_foreign_key "events", "users", column: "participant_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "user_activities", "activities"
   add_foreign_key "user_activities", "users"
-  add_foreign_key "user_events", "events"
-  add_foreign_key "user_events", "users"
 end
