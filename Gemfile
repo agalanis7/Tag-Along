@@ -3,6 +3,18 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.5'
 
+gem 'twilio'
+
+gem 'mailgun'
+
+gem 'omniauth'
+
+gem 'actioncable'
+
+gem 'devise'
+
+gem 'geocoder'
+
 gem 'react_on_rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
