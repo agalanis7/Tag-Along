@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
   resources :profiles
   devise_for :users
   get 'hello_world', to: 'hello_world#index'
