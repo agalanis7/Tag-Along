@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_211504) do
+ActiveRecord::Schema.define(version: 2018_11_08_214715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,34 +21,37 @@ ActiveRecord::Schema.define(version: 2018_11_08_211504) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "activity_locations", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_locations_on_activity_id"
+    t.index ["location_id"], name: "index_activity_locations_on_location_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.date "event_date"
     t.time "start_time"
     t.time "end_time"
     t.integer "quantity"
-    t.integer "notification"
-    t.boolean "completed"
+    t.string "notification"
+    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_events_on_location_id"
   end
 
-  create_table "profile_activities", force: :cascade do |t|
-    t.bigint "profile_id"
-    t.bigint "activity_id"
-    t.integer "skill"
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.float "longitude"
+    t.float "latitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_profile_activities_on_activity_id"
-    t.index ["profile_id"], name: "index_profile_activities_on_profile_id"
-  end
-
-  create_table "profile_events", force: :cascade do |t|
-    t.bigint "profile_id"
-    t.bigint "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_profile_events_on_event_id"
-    t.index ["profile_id"], name: "index_profile_events_on_profile_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -64,6 +67,25 @@ ActiveRecord::Schema.define(version: 2018_11_08_211504) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "user_activities", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "activity_id"
+    t.integer "skill"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_user_activities_on_activity_id"
+    t.index ["user_id"], name: "index_user_activities_on_user_id"
+  end
+
+  create_table "user_events", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_user_events_on_event_id"
+    t.index ["user_id"], name: "index_user_events_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,9 +98,12 @@ ActiveRecord::Schema.define(version: 2018_11_08_211504) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "profile_activities", "activities"
-  add_foreign_key "profile_activities", "profiles"
-  add_foreign_key "profile_events", "events"
-  add_foreign_key "profile_events", "profiles"
+  add_foreign_key "activity_locations", "activities"
+  add_foreign_key "activity_locations", "locations"
+  add_foreign_key "events", "locations"
   add_foreign_key "profiles", "users"
+  add_foreign_key "user_activities", "activities"
+  add_foreign_key "user_activities", "users"
+  add_foreign_key "user_events", "events"
+  add_foreign_key "user_events", "users"
 end

@@ -2,16 +2,16 @@
 
 one:
   event_date: 2018-11-08
-  start_time: 2018-11-08 16:11:07
-  end_time: 2018-11-08 16:11:07
+  start_time: 2018-11-08 16:45:27
+  end_time: 2018-11-08 16:45:27
   quantity: 1
-  notification: 1
-  completed: false
+  notification: MyString
+  location: one
 
 two:
   event_date: 2018-11-08
-  start_time: 2018-11-08 16:11:07
-  end_time: 2018-11-08 16:11:07
+  start_time: 2018-11-08 16:45:27
+  end_time: 2018-11-08 16:45:27
   quantity: 1
-  notification: 1
-  completed: false
+  notification: MyString
+  location: two

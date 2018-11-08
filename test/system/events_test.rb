@@ -14,9 +14,9 @@ class EventsTest < ApplicationSystemTestCase
     visit events_url
     click_on "New Event"
 
-    fill_in "Completed", with: @event.completed
     fill_in "End Time", with: @event.end_time
     fill_in "Event Date", with: @event.event_date
+    fill_in "Location", with: @event.location_id
     fill_in "Notification", with: @event.notification
     fill_in "Quantity", with: @event.quantity
     fill_in "Start Time", with: @event.start_time
@@ -30,9 +30,9 @@ class EventsTest < ApplicationSystemTestCase
     visit events_url
     click_on "Edit", match: :first
 
-    fill_in "Completed", with: @event.completed
     fill_in "End Time", with: @event.end_time
     fill_in "Event Date", with: @event.event_date
+    fill_in "Location", with: @event.location_id
     fill_in "Notification", with: @event.notification
     fill_in "Quantity", with: @event.quantity
     fill_in "Start Time", with: @event.start_time

@@ -5,8 +5,8 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.time :start_time
       t.time :end_time
       t.integer :quantity
-      t.integer :notification
-      t.boolean :completed
+      t.string :notification
+      t.references :location, foreign_key: true
 
       t.timestamps
     end

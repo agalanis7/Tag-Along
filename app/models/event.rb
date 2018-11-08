@@ -1,4 +1,4 @@
 class Event < ApplicationRecord
-  has_many :profiles through: :profile_events
-  has_many :activities through: :profile_activities
+  belongs_to :location
+  belongs_to :user, through: :user_events 
 end
