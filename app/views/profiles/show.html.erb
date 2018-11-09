@@ -30,5 +30,12 @@
   <%= @profile.notification %>
 </p>
 
+<p>
+  <strong>Activities:</strong>
+  <% @profile.user.activities.each do |activity| %>
+    <div><%= activity.name %></div>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

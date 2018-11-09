@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Activity.destroy_all
+
+Activity.find_or_create_by(name: "Basketball")
+Activity.find_or_create_by(name: "Softball")
+Activity.find_or_create_by(name: "Tennis")
+Activity.find_or_create_by(name: "Volleyball")
+Activity.find_or_create_by(name: "Cycling")

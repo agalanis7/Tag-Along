@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_214715) do
+ActiveRecord::Schema.define(version: 2018_11_09_001611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2018_11_08_214715) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "activity_events", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_events_on_activity_id"
+    t.index ["event_id"], name: "index_activity_events_on_event_id"
   end
 
   create_table "activity_locations", force: :cascade do |t|
@@ -93,6 +102,8 @@ ActiveRecord::Schema.define(version: 2018_11_08_214715) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activity_events", "activities"
+  add_foreign_key "activity_events", "events"
   add_foreign_key "activity_locations", "activities"
   add_foreign_key "activity_locations", "locations"
   add_foreign_key "events", "locations"
