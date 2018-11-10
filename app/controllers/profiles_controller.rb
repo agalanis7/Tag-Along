@@ -15,6 +15,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+    @activities = Activity.all 
   end
 
   # GET /profiles/1/edit

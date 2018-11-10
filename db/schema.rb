@@ -44,7 +44,8 @@ ActiveRecord::Schema.define(version: 2018_11_09_001611) do
     t.time "start_time"
     t.time "end_time"
     t.integer "quantity"
-    t.string "notification"
+    t.integer "notification"
+    t.boolean "completed", default: false, null: false
     t.bigint "location_id"
     t.bigint "user_id"
     t.bigint "participant_id"

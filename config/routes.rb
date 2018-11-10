@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  root 'events#index'
-  resources :events
-  resources :profiles
   devise_for :users
-  get 'hello_world', to: 'hello_world#index'
+  root 'events#index'
+  resources :events, only: [:index, :create, :destroy, :update, :new, :edit]
+  resources :profiles, only: [:show, :create, :destroy, :update, :new, :edit]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

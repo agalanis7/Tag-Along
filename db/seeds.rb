@@ -8,8 +8,15 @@
 
 Activity.destroy_all
 
-Activity.find_or_create_by(name: "Basketball")
+basketball = Activity.find_or_create_by(name: "Basketball")
 Activity.find_or_create_by(name: "Softball")
 Activity.find_or_create_by(name: "Tennis")
 Activity.find_or_create_by(name: "Volleyball")
 Activity.find_or_create_by(name: "Cycling")
+
+
+Location.destroy_all
+
+bball_court = Location.create(name: "Basketball court", street: "Lincoln rd", city: "Miami", state: "Fl", country: "USA")
+
+ActivityLocation.create(activity: basketball, location: bball_court)

@@ -4,7 +4,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    if current_user.profile.nil?
+      redirect_to new_profile_path
+    end
     @events = Event.all
+
   end
 
   # GET /events/1
