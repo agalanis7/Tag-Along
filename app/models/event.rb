@@ -1,7 +1,8 @@
 class Event < ApplicationRecord
   belongs_to :location
   belongs_to :user
-  belongs_to :participant, class_name: "User", optional: true
+  has_many :user_events
+  has_many :participant, through: :user_events, source: :user
   has_one :activity_event
   has_one :activity, through: :activity_event
 
