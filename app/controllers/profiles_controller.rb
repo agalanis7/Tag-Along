@@ -4,7 +4,16 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = current_user.profile
+    respond_to do |format|
+      format.html do
+        @profile = Profile.new
+        @profile.user = current_user
+      end
+      format.json do
+        @profiles = Profile.all
+        render json: @profiles
+      end
+    end
   end
 
   # GET /profiles/1
@@ -15,7 +24,16 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
-    @activities = Activity.all 
+    @activities = Activity.all
+  end
+
+  def create
+    @profile = Profile.new(profile_params)
+    if @profile.save
+      render json: @profile
+    else
+      render json: @profile.errors.full_messages, status: 400
+    end
   end
 
   # GET /profiles/1/edit
@@ -24,20 +42,20 @@ class ProfilesController < ApplicationController
 
   # POST /profiles
   # POST /profiles.json
-  def create
-    @profile = Profile.new(profile_params)
-    @profile.user = current_user
-
-    respond_to do |format|
-      if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
-      else
-        format.html { render :new }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def create
+  #   @profile = Profile.new(profile_params)
+  #   @profile.user = current_user
+  #
+  #   respond_to do |format|
+  #     if @profile.save
+  #       format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+  #       format.json { render :show, status: :created, location: @profile }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @profile.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
@@ -71,6 +89,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :gender, :email, :phone_number, :notification)
+      params.require(:profile).permit(:first_name, :last_name, :gender, :email, :phone_number, :notification, :user_id)
     end
 end

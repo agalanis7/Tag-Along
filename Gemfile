@@ -13,6 +13,8 @@ gem 'actioncable'
 
 gem 'devise'
 
+gem 'rack-cors', require: 'rack/cors'
+
 gem 'geocoder'
 
 gem 'react_on_rails'
