@@ -10,6 +10,7 @@
     "animejs": "^2.2.0",
     "axios": "^0.18.0",
     "babel-preset-react": "^6.24.1",
+    "mapbox-gl": "^0.51.0",
     "material-auto-rotating-carousel": "^2.1.0",
     "mo-js": "^0.288.2",
     "nuka-carousel": "^4.4.2",
