@@ -5,5 +5,6 @@ import 'babel-polyfill';
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
-  App, Profile
+  App,
+  Profile
 });
