@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import Welcome from './Welcome'
+import Info from './Info';
+import Carousel from 'nuka-carousel';
 
 class App extends Component {
   render(){
     return(
-    <div>
+    <Carousel>
       <Welcome />
-    </div>
+      <Info />
+    </Carousel>
    )
   }
 }

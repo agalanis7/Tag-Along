@@ -1,12 +1,10 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /events
   # GET /events.json
   def index
-    if current_user.profile.nil?
-      redirect_to new_profile_path
-    end
     @events = Event.all
 
   end
@@ -18,6 +16,9 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
+    if current_user.profile.nil?
+      redirect_to new_profile_path
+    end
     @event = Event.new
   end
 
@@ -29,6 +30,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
+    @event.user = current_user
 
     respond_to do |format|
       if @event.save
@@ -75,4 +77,5 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:event_date, :start_time, :end_time, :quantity, :notification, :location_id)
     end
+
 end
