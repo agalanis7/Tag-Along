@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'welcome/home'
-  devise_for :users, path: '', path_names: { sign_}
+  devise_for :users
   root 'events#index'
   resources :events, except: [:show ]
   resources :profiles
