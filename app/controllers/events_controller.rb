@@ -5,9 +5,17 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-
-  end
+    respond_to do |format|
+      format.html do
+        @event = Event.new
+        @event.user = current_user
+      end
+      format.json do
+        @events = Event.all
+        render json: @events
+       end
+    end
+end
 
   # GET /events/1
   # GET /events/1.json
@@ -75,7 +83,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:event_date, :start_time, :end_time, :quantity, :notification, :location_id)
+      params.require(:event).permit(:event_date, :start_time, :end_time, :quantity, :notification, :location_id, :notification, :user_id, :participant_id)
     end
 
 end

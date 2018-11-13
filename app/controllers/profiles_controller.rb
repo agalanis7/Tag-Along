@@ -29,8 +29,14 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = Profile.new(profile_params)
-    if @profile.save
+    # if activity find doesn't find an activity then render an error
+    activity = Activity.find(params[:activity_id])
+
+    if activity && @profile.save
+
+      current_user.activities << activity
       render json: @profile
+
     else
       render json: @profile.errors.full_messages, status: 400
     end
