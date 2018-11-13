@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'welcome/home'
-  devise_for :users, path: '', path_names: { sign_}
-  root 'events#index'
+  root 'welcome#show'
+  resources :welcome
+  devise_for :users
   resources :events, except: [:show ]
   resources :profiles
   resources :activities

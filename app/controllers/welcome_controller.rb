@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   before_action :require_login
 
-  def home
+  def show
   end
   def info
   end

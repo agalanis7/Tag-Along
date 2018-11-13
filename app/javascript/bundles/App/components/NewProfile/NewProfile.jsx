@@ -19,21 +19,24 @@ class Profile extends Component {
     }
   }
   async componentDidMount() {
-    let {data} = await axios.get('/activities.json')
-    let something = await axios.get(`/profiles.json`)
-    console.log(something)
-    console.log("did it work?")
-    this.setState({activities: data})
+    let {data: activities} = await axios.get('/activities.json')
+    let something = await axios.get('/profiles.json')
+    this.setState({activities})
     }
 
   createProfile = (profile) => {
-    profile.user_id = this.props.user.id
+    profile.user_id = this.props.user.id;
     console.log(profile)
-    axios.post(`/profiles.json`, {
+    console.log("this is profile?");
+    axios.post('/profiles.json', {
       profile: {
         first_name: profile.first_name,
         last_name: profile.last_name,
-        user_id: this.props.user.id
+        gender: profile.gender,
+        phone_number: profile.phone_number,
+        notification: profile.notification,
+        user_id: profile.user_id,
+        activity_id: profile.activity_id
       }
     },
     {headers: headers})
@@ -48,7 +51,7 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <Form createProfile={this.createProfile} />
+        <Form createProfile={this.createProfile} activities={this.state.activities} />
       </div>
     )
   }
