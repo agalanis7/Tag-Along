@@ -11,4 +11,5 @@ ReactOnRails.register({
   NewProfile,
   Events,
   NewEvent
+
 });

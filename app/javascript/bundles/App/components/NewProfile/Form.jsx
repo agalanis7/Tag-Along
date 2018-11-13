@@ -135,7 +135,7 @@ class Form extends Component {
               return (
                 <div>
                   {console.log("hey, this is our activity.id it is important:", activity.id)}
-                  <Button onClick={(e) => {this.handleChange(e)}} value={activity.id} key={`index`} variant="outlined" color={color}> {activity.name}</Button>
+                  <Button onClick={this.handleChange} value={activity.id} key={`index`} variant="outlined" color={color}> {activity.name}</Button>
                 </div>
               )
             })
