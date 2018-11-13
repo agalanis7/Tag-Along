@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import  { BrowserRouter as Router, Route, Link } from  'react-router-dom'
-import greeting from '../Images/greeting.svg';
+import { Button } from 'reactstrap';
+import sport from '../Images/sport.svg';
 
 const handleLogIn = () => {
   Turbolinks.visit('/users/sign_up')
@@ -9,17 +9,21 @@ const handleLogIn = () => {
 class Info extends Component {
   back = e => {
     e.preventDefault();
-    this.prps.prevStep()
+    this.props.prevStep()
   }
 
   render(){
     return(
     <div className="welcome">
+      <div className="logo"><div>LOGO</div></div>
+      <div className="sport">
+          <img src={sport} width="300" height="150" />
+      </div>
       <h1> THIS IN THE INFO </h1>
-      <button onClick={this.back}>Back</button>
-      <button onClick={handleLogIn}>Sign up</button>
+      <Button onClick={this.back}>Back</Button>
+      <Button color="primary" onClick={handleLogIn}>Sign up</Button>
     </div>
-  )
+   )
   }
 }
 
