@@ -61,7 +61,7 @@ class Activities1 extends React.Component {
                     <em>None</em>
                   </MenuItem>
                   { this.props.activities.map((activity, index) =>{
-                    return  <MenuItem value={activity.id} key={index}>{activity.name}</MenuItem>
+                    return  <MenuItem value={activity_id} key={index}>{activity.name}</MenuItem>
                   })
                   }
                 </Select>

@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html do
         @event = Event.new
-        @event.user = current_user
+      
       end
       format.json do
         @events = Event.all
