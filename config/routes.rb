@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   get 'welcome/home'
-  devise_for :users, path: '', path_names: { sign_}
+  devise_for :users
   root 'events#index'
   resources :events, except: [:show ]
   resources :profiles
   resources :activities
+
+  resources :locations, only: [:index]
+  get 'location/index'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
