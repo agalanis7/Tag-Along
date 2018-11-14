@@ -6,4 +6,15 @@
   .welcome {
     width: 100%;
   }
+  * {
+    text-align: center;
+  }
+  .logo {
+    height: 2em;
+    background-color: #4285f4;
+    color: white;
+  }
+  img {
+  padding-top: 2em;
+  }
 }
