@@ -30,11 +30,13 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     # if activity find doesn't find an activity then render an error
-    activity = Activity.find(params[:activity_id])
+    activity = Activity.find(params[:user_activity][:activity_id])
 
     if activity && @profile.save
 
       current_user.activities << activity
+      #skills = params[:user_activity][:skill] = [2,5,1]
+      UserActivity.where(user_id: current_user.id).map_with_index{|a, i| a.update(skill: skills[i])}
       render json: @profile
 
     else
@@ -95,6 +97,9 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :gender, :email, :phone_number, :notification, :user_id)
+      params.require(:profile).permit!
+    end
+    def user_activity_params
+      params.require(:user_activity).permit!
     end
 end

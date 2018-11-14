@@ -36,8 +36,12 @@ class Profile extends Component {
         phone_number: profile.phone_number,
         notification: profile.notification,
         user_id: profile.user_id,
-        activity_id: profile.activity_id
-      }
+
+      },
+      user_activity:{
+        activity_id: profile.activity_id,
+        skill: profile.skill
+        }
     },
     {headers: headers})
     .then((response) => {

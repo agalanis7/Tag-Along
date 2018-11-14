@@ -1,26 +1,58 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import Paper from '@material-ui/core/Paper'
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-});
+class Activities extends Component {
+  state = {
+      labelWidth: 0,
 
-function OutlinedButtons() {
+ };
 
-  return (
-    <div>
-      HELLO WORLD
-    </div>
-  );
+
+componentDidMount() {
+  this.setState({
+    labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+  });
+}
+render() {
+  return(
+    <Grid item md={8} xs={12}>
+        <InputLabel
+           ref={ref => {
+             this.InputLabelRef = ref;
+           }}
+           htmlFor="outlined-age-native-simple"
+         >
+           Activity
+         </InputLabel>
+         <Select
+           native
+           value={this.props.activity_id}
+           onChange={this.props.handleChange}
+           input={
+             <OutlinedInput
+               name="activity"
+               labelWidth={this.state.labelWidth}
+               id="outlined-age-native-simple"
+             />
+           }
+         >
+           <option value="" />
+           { this.props.activities.map((activity, index) =>{
+             return  <option value={activity.id} key={index}>{activity.name}</option>
+           })
+           }
+         </Select>
+       </Grid>
+
+  )
+}
 }
 
 
-
-export default withStyles(styles)(OutlinedButtons);
+export default Activities

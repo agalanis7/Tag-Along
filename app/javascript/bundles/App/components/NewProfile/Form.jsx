@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
 import { withStyles } from '@material-ui/core/styles';
-import Activities from './Activities'
+
 
 const styles = theme => ({
   button: {
@@ -16,15 +16,26 @@ const styles = theme => ({
 });
 
 class Form extends Component {
-  state = {
-    profile: {
-      first_name: '',
-      last_name: '',
-      gender: '',
-      notification: '',
-      activity_id: 0
+  constructor(props) {
+    super(props)
+    this.toggle = this.toggle.bind(this);
+    this.state = {collapse: false}
+
+    this.state = {
+      profile: {
+        first_name: '',
+        last_name: '',
+        gender: '',
+        notification: '',
+        activity_id: []
+      },
+      activities: []
     },
+
   }
+  toggle() {
+   this.setState({ collapse: !this.state.collapse });
+ }
 
   handleFirstNameChange = (event) => {
     let { profile } = this.state;
@@ -51,17 +62,19 @@ class Form extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    let { profile } = this.state;
+    let { profile, activities } = this.state;
     this.props.createProfile(profile)
-    profile = { first_name: '', last_name: '', gender: '', notification: '' }
+    profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: activities, skill: skill }
     this.setState({ profile })
   }
   handleChange = (event) => {
-    console.log("we are handling the change!")
-    console.log("here is the event value: ", event.target.value)
+    let { profile, activities } = this.state
+    // console.log("here is the event value: ", event.target.value)
     event.preventDefault()
-    this.setState({ profile: {activity_id: event.target.value} });
-     console.log(this.state.activity_id)
+    profile.activity_id.push(event.target.value)
+    this.setState({profile})
+    activities.push(event.target.value)
+    console.log(activities)
    }
 
   render() {
@@ -127,15 +140,13 @@ class Form extends Component {
           </Button>
           {
             this.props.activities.map((activity, index) => {
-              console.log("hey, this is our activity.id it is important:", activity.id);
               let color = "primary"
               {if (activity.id){
                 color = "secondary"
               } }
               return (
                 <div>
-                  {console.log("hey, this is our activity.id it is important:", activity.id)}
-                  <Button onClick={this.handleChange} value={activity.id} key={`index`} variant="outlined" color={color}> {activity.name}</Button>
+                  <Button key={index} onClick={this.handleChange} value={activity.id} key={`index`} variant="outlined" color="primary"> {activity.name}</Button>
                 </div>
               )
             })

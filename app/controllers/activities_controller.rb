@@ -10,4 +10,7 @@ class ActivitiesController < ApplicationController
       end
     end
   end
+  def update
+     @activity = current_user.activity.update(activity_params)
+  end
 end
