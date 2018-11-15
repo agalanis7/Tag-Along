@@ -25,6 +25,7 @@ class Form extends Component {
       notification: '',
 
     },
+    activities: this.props.activities
   }
 
   handleDateChange = (event) => {
@@ -58,6 +59,8 @@ class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     let { event_new } = this.state;
+    console.log(event_new)
+    console.log("this is getting sent")
     this.props.createEvent(event_new)
     event_new = { event_date: '',
     start_time: '',
@@ -67,9 +70,18 @@ class Form extends Component {
     this.setState({ event_new })
   }
 
+
+componentDidUpdate() {
+}
+
+handleLocation = () => {
+  let loc = event.target.value.toLowerCase()
+  this.props.locations(loc)
+}
+
+
   render() {
-    const { event_new } = this.state;
-    console.log(event_new)
+    const { event_new, activities } = this.state;
     return (
       <Paper style={{margin: 10, padding: 10}}>
         <form
@@ -129,6 +141,17 @@ class Form extends Component {
                       fullWidth
                     />
                   </Grid>
+                <Grid item md={8} xs={12}>
+                  <select onChange={this.handleLocation}>
+                    {
+                      this.props.activities.map((activity) => {
+                        return (
+                          <option value={activity.name}>{activity.name}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </Grid>
           </Grid>
           <Button
             variant="contained"

@@ -18,9 +18,9 @@ class Form extends Component {
         notification: '',
         activity_id: []
       },
-      activities: [],
-      collapse: false
+      activities: []
     }
+
   }
 
   handleFirstNameChange = (event) => {
