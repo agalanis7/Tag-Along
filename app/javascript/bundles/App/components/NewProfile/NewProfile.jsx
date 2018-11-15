@@ -19,7 +19,7 @@ class Profile extends Component {
     }
   }
   async componentDidMount() {
-    let {data: activities} = await axios.get('/activities.json')
+    let {data: activities} = await axios.get('/activities.json?find=activities')
     let something = await axios.get('/profiles.json')
     this.setState({activities})
     }

@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html do
         @event = Event.new
-      
+
       end
       format.json do
         @events = Event.all
@@ -37,16 +37,22 @@ end
   # POST /events
   # POST /events.json
   def create
+    p params
+    p "THESE ARE THE PARAMS"
+    p "THESE ARE THE PARAMS"
+    p "THESE ARE THE PARAMS"
+    p "THESE ARE THE PARAMS"
+    p "THESE ARE THE PARAMS"
+    p params[:location][:id]
     @event = Event.new(event_params)
     @event.user = current_user
+    @event.location = Location.find(params[:location][:id])
+    @event.save
 
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+      format.html
+      format.json do
+        render json: @event
       end
     end
   end
@@ -83,7 +89,11 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:event_date, :start_time, :end_time, :quantity, :notification, :location_id, :notification, :user_id, :participant_id)
+      params.require(:event).permit!
+    end
+
+    def location_params
+      params.require(:location).permit!
     end
 
 end

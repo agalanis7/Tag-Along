@@ -30,7 +30,7 @@ class Form extends Component {
         activity_id: []
       },
       activities: []
-    },
+    }
 
   }
   toggle() {
