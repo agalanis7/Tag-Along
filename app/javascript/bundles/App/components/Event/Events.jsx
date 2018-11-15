@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import Form from './Form'
 import axios from 'axios'
+import Map from './Map'
 
 
 class Events extends Component {
@@ -21,6 +22,7 @@ class Events extends Component {
     return(
       <div>
         <h1>THESE ARE MY EVENTS</h1>
+        <Map />
         {
           events.map((event) => {
             return (
