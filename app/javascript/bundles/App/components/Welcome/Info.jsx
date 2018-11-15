@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Button } from 'reactstrap';
+import Button from '@material-ui/core/Button'
 import sport from '../Images/sport.svg';
 
-const handleLogIn = () => {
+const handleSignUp = () => {
   Turbolinks.visit('/users/sign_up')
 }
 
@@ -21,7 +21,7 @@ class Info extends Component {
       </div>
       <h1> THIS IN THE INFO </h1>
       <Button onClick={this.back}>Back</Button>
-      <Button color="primary" onClick={handleLogIn}>Sign up</Button>
+      <Button color="primary" onClick={handleSignUp}>Sign up</Button>
     </div>
    )
   }

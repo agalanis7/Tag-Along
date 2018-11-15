@@ -4,7 +4,12 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-
+import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   button: {
@@ -25,7 +30,8 @@ class Form extends Component {
       notification: '',
 
     },
-    activities: this.props.activities
+    activities: this.props.activities,
+    labelWidth: 0,
   }
 
   handleDateChange = (event) => {
@@ -142,15 +148,27 @@ handleLocation = () => {
                     />
                   </Grid>
                 <Grid item md={8} xs={12}>
-                  <select onChange={this.handleLocation}>
-                    {
-                      this.props.activities.map((activity) => {
-                        return (
-                          <option value={activity.name}>{activity.name}</option>
-                        )
-                      })
-                    }
-                  </select>
+
+                  <Select
+                              value={this.state.activities}
+                              onChange={this.handleLocation}
+                              input={
+                                <OutlinedInput
+                                  labelWidth={this.state.labelWidth}
+                                  name="Activity"
+                                  id="outlined-simple"
+                                />
+                              }
+                            >
+                            {
+                              this.props.activities.map((activity) => {
+                                return (
+                                  <MenuItem value={activity.name}>{activity.name}</MenuItem>
+                                )
+                              })
+                            }
+                            </Select>
+
                 </Grid>
           </Grid>
           <Button

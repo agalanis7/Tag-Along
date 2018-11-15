@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button } from 'reactstrap';
 import greeting from '../Images/greeting.svg';
 import Info from './Info'
+import Button from '@material-ui/core/Button'
 
 const handleSignUp = () => {
   Turbolinks.visit('/users/sign_in')
