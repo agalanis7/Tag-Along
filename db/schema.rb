@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_11_11_211943) do
-=======
-ActiveRecord::Schema.define(version: 2018_11_14_161719) do
->>>>>>> master
+ActiveRecord::Schema.define(version: 2018_11_15_231557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,12 +44,15 @@ ActiveRecord::Schema.define(version: 2018_11_14_161719) do
     t.time "start_time"
     t.time "end_time"
     t.integer "quantity"
-    t.string "notification"
+    t.integer "notification"
+    t.boolean "completed", default: false, null: false
     t.bigint "location_id"
     t.bigint "user_id"
+    t.bigint "participant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_events_on_location_id"
+    t.index ["participant_id"], name: "index_events_on_participant_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -67,18 +66,7 @@ ActiveRecord::Schema.define(version: 2018_11_14_161719) do
     t.float "latitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "places", force: :cascade do |t|
-    t.string "name"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.string "country"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "type"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -131,6 +119,7 @@ ActiveRecord::Schema.define(version: 2018_11_14_161719) do
   add_foreign_key "activity_locations", "locations"
   add_foreign_key "events", "locations"
   add_foreign_key "events", "users"
+  add_foreign_key "events", "users", column: "participant_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "user_activities", "activities"
   add_foreign_key "user_activities", "users"
