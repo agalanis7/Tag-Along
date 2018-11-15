@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
 import { withStyles } from '@material-ui/core/styles';
+import TagDropdown from './TagDropdown.js'
+import NavBar from '../NavBar.js'
 
 
 class Form extends Component {
@@ -67,6 +69,8 @@ class Form extends Component {
     const { profile } = this.state;
     console.log(profile)
     return (
+    <div>
+      <NavBar/>
       <Paper style={{margin: 10, padding: 10}}>
         <form
           style={{display: 'flex', flexWrap: 'wrap'}}
@@ -96,14 +100,7 @@ class Form extends Component {
               />
             </Grid>
               <Grid item md={8} xs={12}>
-                <TextField
-                  label="Gender"
-                  id="profile_gender"
-                  value={profile.gender}
-                  onChange={this.handleGenderChange}
-                  margin="normal"
-                  fullWidth
-                />
+              <TagDropdown handleGenderChange={this.handleGenderChange}/>
               </Grid>
               <Grid item md={8} xs={12}>
                   <TextField
@@ -122,7 +119,8 @@ class Form extends Component {
             onClick={ this.handleSubmit }
 
           >
-            Create Profile
+      
+            Create Profiles
           </Button>
           {
             this.props.activities.map((activity, index) => {
@@ -146,6 +144,7 @@ class Form extends Component {
           }
         </form>
       </Paper>
+    </div>
     )
   }
 }

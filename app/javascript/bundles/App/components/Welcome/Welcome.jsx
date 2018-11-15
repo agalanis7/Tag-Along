@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 import greeting from '../Images/greeting.svg';
 import Info from './Info'
 
+
 const handleSignUp = () => {
   Turbolinks.visit('/users/sign_in')
 }
@@ -15,6 +16,7 @@ class Welcome extends Component {
   render(){
     return(
     <div>
+    
       <div className="logo"><div>LOGO</div></div>
       <div className="greeting">
           <img src={greeting} width="300" height="150" />

@@ -5,10 +5,6 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-<<<<<<< HEAD
-    @events = Event.all
-  end
-=======
     respond_to do |format|
       format.html do
         @event = Event.new
@@ -20,7 +16,6 @@ class EventsController < ApplicationController
        end
     end
 end
->>>>>>> master
 
   # GET /events/1
   # GET /events/1.json

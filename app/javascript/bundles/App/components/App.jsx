@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Welcome from './Welcome/Welcome.jsx'
 import Info from './Welcome/Info.jsx'
+import NavBar from './NavBar.js'
 
 class App extends Component {
  state = { step: 1 }
@@ -18,13 +19,24 @@ class App extends Component {
   });
  }
 
+ infoOrWelcome = () => {
+  switch( this.state.step ){
+    case 1:
+     return (<Welcome nextStep = {this.nextStep}/>);
+     break;
+    case 2:
+     return (<Info prevStep = {this.prevStep} />);
+     break;
+   }
+ }
+
 render(){
-      switch( this.state.step ){
-         case 1:
-          return (<Welcome nextStep = {this.nextStep}/>);
-         case 2:
-          return (<Info prevStep = {this.prevStep} />);
-       }
+  return(
+    <div>
+      <NavBar/>
+        { this.infoOrWelcome() }
+    </div>
+  )
  }
 }
 export default App

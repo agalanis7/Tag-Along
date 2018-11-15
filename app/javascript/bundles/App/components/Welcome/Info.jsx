@@ -14,6 +14,9 @@ class Info extends Component {
 
   render(){
     return(
+      
+      
+      
     <div className="welcome">
       <div className="logo"><div>LOGO</div></div>
       <div className="sport">
