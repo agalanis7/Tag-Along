@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 // import Form from './Form'
+import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import Map from './Map'
 
+const handleCreateEvent = () => {
+  Turbolinks.visit('/events/new')
+}
 
 class Events extends Component {
   constructor() {
@@ -34,6 +38,7 @@ class Events extends Component {
             )
           })
         }
+        <Button onClick={handleCreateEvent} color="primary"> Create New Event </Button>
       </div>
 
     )
