@@ -6,21 +6,10 @@ import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
 import { withStyles } from '@material-ui/core/styles';
 
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-});
-
 class Form extends Component {
   constructor(props) {
     super(props)
-    this.toggle = this.toggle.bind(this);
-    this.state = {collapse: false}
-
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       profile: {
         first_name: '',
@@ -33,9 +22,6 @@ class Form extends Component {
     }
 
   }
-  toggle() {
-   this.setState({ collapse: !this.state.collapse });
- }
 
   handleFirstNameChange = (event) => {
     let { profile } = this.state;
@@ -66,15 +52,15 @@ class Form extends Component {
     this.props.createProfile(profile)
     profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: activities, skill: skill }
     this.setState({ profile })
+    Turbolinks.visit('/events/index')
   }
   handleChange = (event) => {
-    let { profile, activities } = this.state
+    let { profile, collapse } = this.state
     // console.log("here is the event value: ", event.target.value)
     event.preventDefault()
     profile.activity_id.push(event.target.value)
-    this.setState({profile})
-    activities.push(event.target.value)
-    console.log(activities)
+    this.setState({profile: {}, collapse: !collapse})
+
    }
 
   render() {
@@ -146,8 +132,15 @@ class Form extends Component {
               } }
               return (
                 <div>
-                  <Button key={index} onClick={this.handleChange} value={activity.id} key={`index`} variant="outlined" color="primary"> {activity.name}</Button>
-                </div>
+                  <Button key={index} onClick={this.handleChange} value={activity.id} key={`index`} color="primary" style={{ marginBottom: '1rem' }}> {activity.name}</Button>
+                  <Collapse isOpen={this.state.collapse}>
+                    <Card>
+                     <CardBody>
+                       skill level was here!
+                     </CardBody>
+                    </Card>
+                  </Collapse>
+              </div>
               )
             })
           }
