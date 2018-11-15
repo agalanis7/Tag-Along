@@ -95,6 +95,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.7)
+    hirb (0.7.3)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
     i18n (1.1.1)
@@ -257,6 +258,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   geocoder
+  hirb
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
@@ -283,4 +285,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.17.0
+   1.17.1
