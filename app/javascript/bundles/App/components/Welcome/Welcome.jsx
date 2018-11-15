@@ -3,7 +3,7 @@ import { Button } from 'reactstrap';
 import greeting from '../Images/greeting.svg';
 import Info from './Info'
 
-const handleLogIn = () => {
+const handleSignUp = () => {
   Turbolinks.visit('/users/sign_in')
 }
 
@@ -23,7 +23,7 @@ class Welcome extends Component {
       <p>Some text here !</p>
       <Button color="primary" onClick={this.continue}>Get started!</Button>
       <div>
-      <Button onClick={handleLogIn}>Have an account? Log in</Button>
+      <Button onClick={handleSignUp}>Have an account? Log in</Button>
       </div>
     </div>
   )
