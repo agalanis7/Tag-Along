@@ -29,16 +29,12 @@ class ProfilesController < ApplicationController
 
   def create
     @profile = Profile.new(profile_params)
-    # if activity find doesn't find an activity then render an error
-    activity = Activity.find(params[:user_activity][:activity_id])
-
-    if activity && @profile.save
-
-      current_user.activities << activity
-      #skills = params[:user_activity][:skill] = [2,5,1]
-      UserActivity.where(user_id: current_user.id).map_with_index{|a, i| a.update(skill: skills[i])}
+    if @profile.save
+      @profile.user.user_activities.delete_all
+      params[:user_activity][:activity_id].each do |activity_id|
+        @profile.user.user_activities.find_or_create_by(activity_id: activity_id)
+      end
       render json: @profile
-
     else
       render json: @profile.errors.full_messages, status: 400
     end
