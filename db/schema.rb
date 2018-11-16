@@ -48,9 +48,11 @@ ActiveRecord::Schema.define(version: 2018_11_15_234012) do
     t.boolean "completed", default: false, null: false
     t.bigint "location_id"
     t.bigint "user_id"
+    t.bigint "participant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_events_on_location_id"
+    t.index ["participant_id"], name: "index_events_on_participant_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_234012) do
   add_foreign_key "activity_locations", "locations"
   add_foreign_key "events", "locations"
   add_foreign_key "events", "users"
+  add_foreign_key "events", "users", column: "participant_id"
   add_foreign_key "profiles", "users"
   add_foreign_key "user_activities", "activities"
   add_foreign_key "user_activities", "users"

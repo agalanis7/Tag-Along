@@ -21,7 +21,7 @@ class Welcome extends Component {
       <div className="greeting">
           <img src={greeting} width="300" height="150" />
       </div>
-      <h1>Welcome</h1>
+      <h1>Hello Welcome</h1>
       <p>Some text here !</p>
       <Button color="primary" onClick={this.continue}>Get started!</Button>
       <div>

@@ -15,12 +15,9 @@ class EventsController < ApplicationController
       elsif params[:events] == "locations"
         format.json{render json: @events.map{|e| e.location}}
       end
-    end
-<<<<<<< HEAD
+    
 end
-=======
   end
->>>>>>> 18044384bcdf6498855a940ae260b435965a000f
 
   # GET /events/1
   # GET /events/1.json

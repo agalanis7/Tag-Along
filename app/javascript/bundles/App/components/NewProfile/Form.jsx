@@ -4,12 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 // import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
 import { withStyles } from '@material-ui/core/styles';
-<<<<<<< HEAD
 import TagDropdown from './TagDropdown.js'
 import NavBar from '../NavBar.js'
-=======
 import Button from '@material-ui/core/Button'
->>>>>>> 18044384bcdf6498855a940ae260b435965a000f
 
 
 class Form extends Component {
