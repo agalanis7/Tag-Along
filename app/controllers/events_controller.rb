@@ -37,10 +37,17 @@ end
   # POST /events
   # POST /events.json
   def create
+    p params
+    p "THESE ARE THE PARAms"
+    p "THESE ARE THE PARAms"
+    p "THESE ARE THE PARAms"
+    p "THESE ARE THE PARAms"
+    p "THESE ARE THE PARAms"
     p params[:location][:id]
     @event = Event.new(event_params)
     @event.user = current_user
     @event.location = Location.find(params[:location][:id])
+    @event.activity = Activity.find(params[:location][:activity_id])
     @event.save
 
     respond_to do |format|

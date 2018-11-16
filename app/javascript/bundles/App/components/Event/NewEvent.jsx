@@ -18,7 +18,8 @@ class NewEvent extends Component {
       events: [],
       locations: [],
       activities: [],
-      loc: ''
+      loc: '',
+      activity_id: ''
     }
   }
 
@@ -30,10 +31,10 @@ class NewEvent extends Component {
     }
 
 
-  fetchLocations = async (loc) => {
+  fetchLocations = async (loc, activity) => {
     let { data } = await axios.get(`/activities.json?find=${loc}`)
     console.log(data)
-    this.setState({ locations: data })
+    this.setState({ locations: data, activity_id: activity })
   }
 
   handleLoc = (event) => {
@@ -55,8 +56,9 @@ class NewEvent extends Component {
           notification: event_new.notification
         },
         location: {
-          id: this.state.loc
-        }
+          id: this.state.loc,
+          activity_id: this.state.activity_id
+        },
       },
       {headers: headers})
       .then((response) => {

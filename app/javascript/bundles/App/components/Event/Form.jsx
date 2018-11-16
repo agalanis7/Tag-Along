@@ -87,7 +87,7 @@ handleLocation = (location, activity ) => {
     event_new.activity_id = activity
     this.setState({ event_new })
     let loc = location.toLowerCase()
-    this.props.locations(loc)
+    this.props.locations(loc, activity)
 
   }
 }
