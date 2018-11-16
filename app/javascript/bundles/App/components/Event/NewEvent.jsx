@@ -11,6 +11,7 @@ const headers = {
         'X-CSRF-TOKEN':     token
       }
 
+
 class NewEvent extends Component {
   constructor() {
     super()
@@ -48,6 +49,7 @@ class NewEvent extends Component {
     let post = axios.post(`/events/7/user_events`, {}, {headers: headers}).then((res) => {
       console.log(res)
     })
+    Turbolinks.visit('/events')
   }
 
     createEvent = (event_new) => {
@@ -87,7 +89,7 @@ class NewEvent extends Component {
             </div>
           )
         })}
-        <button onClick={this.testingParticipant}>test me</button>
+        <button onClick={this.testingParticipant}>Create me</button>
       </div>
     )
   }
