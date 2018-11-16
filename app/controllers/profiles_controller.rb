@@ -19,6 +19,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @user = @profile.user
+    @activities = @user.activities
+    @events = Event.where(user_id: @profile.user.id)
   end
 
   # GET /profiles/new

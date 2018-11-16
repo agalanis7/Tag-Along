@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   root 'welcome#show'
   resources :welcome
   devise_for :users
-  resources :events
+  resources :events do
+    resources :user_events, only: [:create, :destroy]
+  end
   resources :profiles
   resources :activities
   resources :locations, only: [:index]

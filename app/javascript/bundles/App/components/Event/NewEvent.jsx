@@ -25,7 +25,7 @@ class NewEvent extends Component {
 
   async componentDidMount() {
     let {data} = await axios.get('/activities.json?find=activities')
-    let something = await axios.get('/events.json')
+    let something = await axios.get('/events.json?events=events')
     // let locations = await axios.get('/locations.json')
     this.setState({activities: data})
     }
@@ -42,6 +42,12 @@ class NewEvent extends Component {
     loc = event.target.value
     this.setState({ loc })
     console.log(loc)
+  }
+
+  testingParticipant = () => {
+    let post = axios.post(`/events/7/user_events`, {}, {headers: headers}).then((res) => {
+      console.log(res)
+    })
   }
 
     createEvent = (event_new) => {
@@ -81,6 +87,7 @@ class NewEvent extends Component {
             </div>
           )
         })}
+        <button onClick={this.testingParticipant}>test me</button>
       </div>
     )
   }
