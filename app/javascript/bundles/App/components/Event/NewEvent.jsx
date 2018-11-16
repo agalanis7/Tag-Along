@@ -74,7 +74,9 @@ class NewEvent extends Component {
         <Form activities={activities} locations={this.fetchLocations} createEvent={this.createEvent} />
         {locations.map((loc) => {
           return (
-            <button onClick={this.handleLoc} key={loc.id} value={loc.id}>{loc.name}, {loc.street}, {loc.city}, {loc.state}</button>
+            <div>
+              <button onClick={this.handleLoc} key={loc.id} value={loc.id}>{loc.name}, {loc.street}, {loc.city}, {loc.state}</button>
+            </div>
           )
         })}
       </div>

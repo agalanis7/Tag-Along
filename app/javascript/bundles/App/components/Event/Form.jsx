@@ -28,6 +28,7 @@ class Form extends Component {
       end_time: '',
       quantity: '',
       notification: '',
+      activity_id: ''
 
     },
     activities: this.props.activities,
@@ -80,9 +81,15 @@ class Form extends Component {
 componentDidUpdate() {
 }
 
-handleLocation = () => {
-  let loc = event.target.value.toLowerCase()
-  this.props.locations(loc)
+handleLocation = (location, activity ) => {
+  let { event_new } = this.state
+  if ( event_new.activity_id != activity) {
+    event_new.activity_id = activity
+    this.setState({ event_new })
+    let loc = location.toLowerCase()
+    this.props.locations(loc)
+
+  }
 }
 
 
@@ -148,27 +155,23 @@ handleLocation = () => {
                     />
                   </Grid>
                 <Grid item md={8} xs={12}>
-
-                  <Select
-                              value={this.state.activities}
-                              onChange={this.handleLocation}
-                              input={
-                                <OutlinedInput
-                                  labelWidth={this.state.labelWidth}
-                                  name="Activity"
-                                  id="outlined-simple"
-                                />
-                              }
-                            >
-                            {
-                              this.props.activities.map((activity) => {
-                                return (
-                                  <MenuItem value={activity.name}>{activity.name}</MenuItem>
-                                )
-                              })
-                            }
-                            </Select>
-
+                  {
+                    this.props.activities.map((activity, index) => {
+                      return (
+                        <div key={index}>
+                          <Button
+                            type="button"
+                            key={index} onClick={ (e) => { this.handleLocation(activity.name, activity.id) } }
+                            value={activity.id} key={`index`}
+                            variant={ this.state.event_new.activity_id === activity.id ? "contained" : "outlined" }
+                            color="secondary"
+                          >
+                            {activity.name}
+                          </Button>
+                        </div>
+                      )
+                    })
+                  }
                 </Grid>
           </Grid>
           <Button

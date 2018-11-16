@@ -37,12 +37,6 @@ end
   # POST /events
   # POST /events.json
   def create
-    p params
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
     p params[:location][:id]
     @event = Event.new(event_params)
     @event.user = current_user
