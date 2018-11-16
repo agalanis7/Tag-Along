@@ -21,7 +21,8 @@ User.destroy_all
 # Event.destroy_all
 # User.destroy_all
 
-User.create(email: "someguy@someguy.com", password: "password", password_confirmation: "password")
+user = User.create(email: "someguy@someguy.com", password: "password", password_confirmation: "password")
+Profile.create(user: user, first_name: "Some", last_name: "Guy")
 
 basketball = Activity.find_or_create_by(name: "Basketball")
 biking     = Activity.find_or_create_by(name: "Biking")

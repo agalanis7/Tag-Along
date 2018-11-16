@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :events do
     resources :user_events, only: [:create, :destroy]
+    resources :messages, only: [:create]
   end
   resources :profiles
   resources :activities
