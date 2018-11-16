@@ -12,3 +12,11 @@
  *
  */
 @import "bootstrap";
+
+
+.markers {
+  background-color: red !important;
+  background-size: cover !important;
+  width: 20px !important;
+  height:20px !important;
+}

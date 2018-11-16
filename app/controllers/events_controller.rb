@@ -2,20 +2,21 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  # GET /events
+  # GET /events    @activities = Activity.all
   # GET /events.json
   def index
     respond_to do |format|
       format.html do
         @event = Event.new
-
       end
-      format.json do
-        @events = Event.all
-        render json: @events
-       end
+      @events = Event.all
+      if params[:events] == "events"
+        format.json{render json: @events}
+      elsif params[:events] == "locations"
+        format.json{render json: @events.map{|e| e.location}}
+      end
     end
-end
+  end
 
   # GET /events/1
   # GET /events/1.json
@@ -37,12 +38,6 @@ end
   # POST /events
   # POST /events.json
   def create
-    p params
-    p "THESE ARE THE PARAms"
-    p "THESE ARE THE PARAms"
-    p "THESE ARE THE PARAms"
-    p "THESE ARE THE PARAms"
-    p "THESE ARE THE PARAms"
     p params[:location][:id]
     @event = Event.new(event_params)
     @event.user = current_user
