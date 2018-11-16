@@ -3,7 +3,8 @@ import App from '../bundles/App/components/App';
 import NewProfile from '../bundles/App/components/NewProfile/NewProfile';
 import Events from '../bundles/App/components/Event/Events';
 import NewEvent from '../bundles/App/components/Event/NewEvent';
-import Map from '../bundles/App/components/Event/Map'
+import Profile from '../bundles/App/components/Profile/Profile';
+import Event from '../bundles/App/components/Event/Event'
 import 'babel-polyfill';
 
 
@@ -13,6 +14,7 @@ ReactOnRails.register({
   NewProfile,
   Events,
   NewEvent,
-  Map
+  Event,
+  Profile
 
 });

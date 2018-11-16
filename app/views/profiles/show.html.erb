@@ -1,41 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @profile.gender %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @profile.phone_number %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @profile.user.email %>
-</p>
-
-<p>
-  <strong>Notification:</strong>
-  <%= @profile.notification %>
-</p>
-
-<p>
-  <strong>Activities:</strong>
-  <% @profile.user.activities.each do |activity| %>
-    <div><%= activity.name %></div>
-  <% end %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', root_path %>
+<%=
+  react_component 'Profile',
+  props: { profile: @profile, user: @user, activities: @activities, events: @events } 
+%>

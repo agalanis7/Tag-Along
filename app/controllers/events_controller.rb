@@ -21,6 +21,14 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @user = @event.user
+    @profile = @event.user.profile
+    @participants = @event.participants.map{|p| p.profile }
+    @activity = @event.activity
+    respond_to do |format|
+      format.html
+      format.json{render json: @event.participants.map{|p| p.profile }}
+    end
   end
 
   # GET /events/new
