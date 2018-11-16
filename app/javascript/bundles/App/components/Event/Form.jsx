@@ -4,7 +4,12 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-
+import Input from '@material-ui/core/Input';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import FilledInput from '@material-ui/core/FilledInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   button: {
@@ -23,9 +28,11 @@ class Form extends Component {
       end_time: '',
       quantity: '',
       notification: '',
+      activity_id: ''
 
     },
-    activities: this.props.activities
+    activities: this.props.activities,
+    labelWidth: 0,
   }
 
   handleDateChange = (event) => {
@@ -74,9 +81,15 @@ class Form extends Component {
 componentDidUpdate() {
 }
 
-handleLocation = () => {
-  let loc = event.target.value.toLowerCase()
-  this.props.locations(loc)
+handleLocation = (location, activity ) => {
+  let { event_new } = this.state
+  if ( event_new.activity_id != activity) {
+    event_new.activity_id = activity
+    this.setState({ event_new })
+    let loc = location.toLowerCase()
+    this.props.locations(loc, activity)
+
+  }
 }
 
 
@@ -142,15 +155,23 @@ handleLocation = () => {
                     />
                   </Grid>
                 <Grid item md={8} xs={12}>
-                  <select onChange={this.handleLocation}>
-                    {
-                      this.props.activities.map((activity) => {
-                        return (
-                          <option value={activity.name}>{activity.name}</option>
-                        )
-                      })
-                    }
-                  </select>
+                  {
+                    this.props.activities.map((activity, index) => {
+                      return (
+                        <div key={index}>
+                          <Button
+                            type="button"
+                            key={index} onClick={ (e) => { this.handleLocation(activity.name, activity.id) } }
+                            value={activity.id} key={`index`}
+                            variant={ this.state.event_new.activity_id === activity.id ? "contained" : "outlined" }
+                            color="secondary"
+                          >
+                            {activity.name}
+                          </Button>
+                        </div>
+                      )
+                    })
+                  }
                 </Grid>
           </Grid>
           <Button

@@ -2,24 +2,37 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  # GET /events
+  # GET /events    @activities = Activity.all
   # GET /events.json
   def index
     respond_to do |format|
       format.html do
         @event = Event.new
-
       end
-      format.json do
-        @events = Event.all
-        render json: @events
-       end
+      @events = Event.all
+      if params[:events] == "events"
+        format.json{render json: @events}
+      elsif params[:events] == "locations"
+        format.json{render json: @events.map{|e| e.location}}
+      end
     end
+<<<<<<< HEAD
 end
+=======
+  end
+>>>>>>> 18044384bcdf6498855a940ae260b435965a000f
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @user = @event.user
+    @profile = @event.user.profile
+    @participants = @event.participants.map{|p| p.profile }
+    @activity = @event.activity
+    respond_to do |format|
+      format.html
+      format.json{render json: @event.participants.map{|p| p.profile }}
+    end
   end
 
   # GET /events/new
@@ -37,16 +50,11 @@ end
   # POST /events
   # POST /events.json
   def create
-    p params
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
-    p "THESE ARE THE PARAMS"
     p params[:location][:id]
     @event = Event.new(event_params)
     @event.user = current_user
     @event.location = Location.find(params[:location][:id])
+    @event.activity = Activity.find(params[:location][:activity_id])
     @event.save
 
     respond_to do |format|

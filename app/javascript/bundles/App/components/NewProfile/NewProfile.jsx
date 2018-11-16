@@ -36,12 +36,10 @@ class Profile extends Component {
         phone_number: profile.phone_number,
         notification: profile.notification,
         user_id: profile.user_id,
-
       },
       user_activity:{
-        activity_id: profile.activity_id,
-        skill: profile.skill
-        }
+        activity_id: profile.activity_id
+      }
     },
     {headers: headers})
     .then((response) => {
@@ -49,8 +47,8 @@ class Profile extends Component {
       console.log(profile)
       let { profiles } = this.state;
       profiles.push(response.data);
-      this.setState({ profiles });
-      Turbolinks.visit('/events/index')
+      this.setState({ profiles })
+      Turbolinks.visit('/events')
     })
   }
   render() {

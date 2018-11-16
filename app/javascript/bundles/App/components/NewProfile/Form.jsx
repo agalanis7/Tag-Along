@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
+// import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
 import { withStyles } from '@material-ui/core/styles';
+<<<<<<< HEAD
 import TagDropdown from './TagDropdown.js'
 import NavBar from '../NavBar.js'
+=======
+import Button from '@material-ui/core/Button'
+>>>>>>> 18044384bcdf6498855a940ae260b435965a000f
 
 
 class Form extends Component {
@@ -52,17 +56,19 @@ class Form extends Component {
     event.preventDefault();
     let { profile, activities } = this.state;
     this.props.createProfile(profile)
-    profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: activities, skill: skill }
+    profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: [] }
     this.setState({ profile })
     Turbolinks.visit('/events/index')
   }
-  handleChange = (event) => {
-    let { profile, collapse } = this.state
-    // console.log("here is the event value: ", event.target.value)
-    event.preventDefault()
-    profile.activity_id.push(event.target.value)
-    this.setState({profile: {}, collapse: !collapse})
 
+  handleChange = (activityId) => {
+    let { profile, activities } = this.state
+    if(!profile.activity_id.includes(activityId)){
+      profile.activity_id.push(activityId)
+    }else{
+      profile.activity_id = profile.activity_id.filter(id => id !== activityId)
+    }
+    this.setState({profile})
    }
 
   render() {
@@ -117,28 +123,25 @@ class Form extends Component {
             variant="contained"
             color="primary"
             onClick={ this.handleSubmit }
-
           >
       
             Create Profiles
           </Button>
           {
             this.props.activities.map((activity, index) => {
-              let color = "primary"
-              {if (activity.id){
-                color = "secondary"
-              } }
+              console.log(activity.id)
               return (
-                <div>
-                  <Button key={index} onClick={this.handleChange} value={activity.id} key={`index`} color="primary" style={{ marginBottom: '1rem' }}> {activity.name}</Button>
-                  <Collapse isOpen={this.state.collapse}>
-                    <Card>
-                     <CardBody>
-                       skill level was here!
-                     </CardBody>
-                    </Card>
-                  </Collapse>
-              </div>
+                <div key={index}>
+                  <Button
+                    type="button"
+                    key={index} onClick={ (e) => { this.handleChange(activity.id) } }
+                    value={activity.id} key={`index`}
+                    variant={ this.state.profile.activity_id.includes(activity.id) ? "contained" : "outlined" }
+                    color="secondary"
+                  >
+                    {activity.name}
+                  </Button>
+                </div>
               )
             })
           }

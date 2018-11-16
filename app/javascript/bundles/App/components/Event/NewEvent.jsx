@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from './Form'
 import axios from 'axios'
+import Button from '@material-ui/core/Button'
 
 const token = document
                 .querySelector('meta[name="csrf-token"]')
@@ -17,22 +18,23 @@ class NewEvent extends Component {
       events: [],
       locations: [],
       activities: [],
-      loc: ''
+      loc: '',
+      activity_id: ''
     }
   }
 
   async componentDidMount() {
     let {data} = await axios.get('/activities.json?find=activities')
-    let something = await axios.get('/events.json')
+    let something = await axios.get('/events.json?events=events')
     // let locations = await axios.get('/locations.json')
     this.setState({activities: data})
     }
 
 
-  fetchLocations = async (loc) => {
+  fetchLocations = async (loc, activity) => {
     let { data } = await axios.get(`/activities.json?find=${loc}`)
     console.log(data)
-    this.setState({ locations: data })
+    this.setState({ locations: data, activity_id: activity })
   }
 
   handleLoc = (event) => {
@@ -40,6 +42,12 @@ class NewEvent extends Component {
     loc = event.target.value
     this.setState({ loc })
     console.log(loc)
+  }
+
+  testingParticipant = () => {
+    let post = axios.post(`/events/7/user_events`, {}, {headers: headers}).then((res) => {
+      console.log(res)
+    })
   }
 
     createEvent = (event_new) => {
@@ -54,8 +62,9 @@ class NewEvent extends Component {
           notification: event_new.notification
         },
         location: {
-          id: this.state.loc
-        }
+          id: this.state.loc,
+          activity_id: this.state.activity_id
+        },
       },
       {headers: headers})
       .then((response) => {
@@ -73,9 +82,12 @@ class NewEvent extends Component {
         <Form activities={activities} locations={this.fetchLocations} createEvent={this.createEvent} />
         {locations.map((loc) => {
           return (
-            <button onClick={this.handleLoc} key={loc.id} value={loc.id}>{loc.name}, {loc.street}, {loc.city}, {loc.state}</button>
+            <div>
+              <button onClick={this.handleLoc} key={loc.id} value={loc.id}>{loc.name}, {loc.street}, {loc.city}, {loc.state}</button>
+            </div>
           )
         })}
+        <button onClick={this.testingParticipant}>test me</button>
       </div>
     )
   }
