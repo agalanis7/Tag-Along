@@ -1,61 +1,109 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
+import ReactDOMServer from 'react-dom/server'
 import axios from 'axios'
+import Popup from './Popup.jsx'
 
-export default class Map extends Component {
+ class Map extends Component {
+   constructor() {
+     super()
+     this.state = {
+       locs: []
+     }
+   }
 
-  constructor() {
-    super()
-    this.state = {
-      locations: []
-    }
+   async componentDidMount() {
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYW5keXdlaXNzMTk4MiIsImEiOiJIeHpkYVBrIn0.3N03oecxx5TaQz7YLg2HqA'
+
+      //OPTIONS FOR BUILT IN GEOLOCATOR BUTTON
+      const geolocationOptions = {
+      //Tells Geocoder to use gps locating over ip locating
+        enableHighAccuracy: true,
+      //Sets maximum wait time
+        maximumAge        : 30000,
+        timeout           : 27000
+      };
+
+      //OPTIONS FOR MAPBOX COMPONENT
+      const mapOptions = {
+        //DEFINES CONTAINER
+        container: this.mapContainer,
+        style: `mapbox://styles/mapbox/streets-v9`,
+        zoom: 12,
+        center: [-80.2044, 25.8028]
+      }
+
+      this.createMap(mapOptions, geolocationOptions)
+   }
+
+   createMap = (mapOptions, geolocationOptions) => {
+     this.map = new mapboxgl.Map(mapOptions)
+     const map = this.map;
+
+     map.addControl(
+       new mapboxgl.GeolocateControl({
+         positionOptions: geolocationOptions,
+         trackUserLocation: true
+       })
+     )
+
+     map.addControl(
+       new mapboxgl.NavigationControl({
+         positionOption: geolocationOptions,
+         trackUserLocation: true
+       })
+     )
+
+     map.on('load', (event) => {
+       this.fetchLocations()
+     })
+   }
+
+   fetchLocations = () => {
+     const map = this.map;
+     let newMarkers = this.props.locs
+     newMarkers.forEach((loc, i) => {
+       let elm = document.createElement('div')
+       elm.className = "markers"
+       let popup = new mapboxgl.Popup({ offset: 25})
+       .setHTML(ReactDOMServer.renderToStaticMarkup(
+         <Popup loc={loc}></Popup>
+       ))
+       popup.on('open', (e) => {
+         document.getElementById(`${loc.id}`).addEventListener('click', function() {
+           Turbolinks.visit(`/events/${i + 1}`)
+         })
+       })
+       // elm.className = `${loc.location_type.toLowerCase()}`
+       let marker = new mapboxgl.Marker(elm)
+       .setLngLat([loc.longitude, loc.latitude])
+       .setPopup(popup)
+      marker.addTo(map)
+     })
+   }
+
+   componentDidUpdate() {
+     console.log(this.props.locs)
+   }
+
+   componentWillUnmount() {
+     this.map.remove();
   }
-  componentDidMount() {
-    mapboxgl.accessToken = 'pk.eyJ1Ijoicm9iZXJ0b3Nhbm1hcnRpbiIsImEiOiJjam9lazBwOG0zMDZvM3ZubHo3ejc4Y3VqIn0.t0pQuI4fe18O8IuQkxwFFw'
-    const mapOptions = {
-      container: this.mapContainer,
-      style: `mapbox://styles/mapbox/streets-v9`,
-      zoom: 12,
-      center: [-80.2044, 25.8028]
-    }
 
-    this.createMap(mapOptions)
+   render() {
+     const style = {
+       width: '100%',
+       height: '500px',
+       backgroundColor: 'azure'
+     };
+     return (
+       <div>
+         <div id="map" style={style} ref={el => this.mapContainer = el} />
+       </div>
+     )
+   }
+
 }
 
-createMap = (mapOptions) => {
-  this.map = new mapboxgl.Map(mapOptions)
-  const map = this.map
-  map.on('load', (event) => {
-    this.fetchPlaces()
-  })
-}
 
-
-  fetchPlaces = () => {
-    const map = this.map
-    let {data} = axios.get(`/locations.json`).then(res => {
-      this.setState({locations: res.data.features})
-      console.log(this.state.locations)
-      this.state.locations.forEach((loc, i) => {
-        let elm = document.createElement('div')
-        elm.className = "marker"
-        let marker = new mapboxgl.Marker(elm)
-        .setLngLat(loc.geometry.coordinates)
-        marker.addTo(map)
-      })
-    })
-  }
-
-  render() {
-    const style = {
-      width: '100%',
-      height: '500px',
-      backgroundColor: 'azure'
-    };
-    return <div style={style} ref={el => this.mapContainer = el} />;
-  }
-
-  componentWillUnmount() {
-    this.map.remove();
-  }
-}
+export default Map

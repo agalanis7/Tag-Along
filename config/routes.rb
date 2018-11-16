@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#show'
   resources :welcome
   devise_for :users
-  resources :events, except: [:show ]
+  resources :events
   resources :profiles
   resources :activities
   resources :locations, only: [:index]
