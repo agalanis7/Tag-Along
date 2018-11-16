@@ -25,9 +25,9 @@ class Form extends Component {
     event_new: {
       event_date: '',
       start_time: '',
-      end_time: '',
       quantity: '',
       notification: '',
+      description: '',
       activity_id: ''
 
     },
@@ -47,9 +47,9 @@ class Form extends Component {
     this.setState({ event_new});
   }
 
-  handleEndTimeChange = (event) => {
+  handleDescriptionChange = (event) => {
     let { event_new } = this.state;
-    event_new.end_time = event.target.value;
+    event_new.description = event.target.value;
     this.setState({ event_new });
   }
   handleQuantityChange = (event) => {
@@ -125,21 +125,21 @@ handleLocation = (location, activity ) => {
               />
             </Grid>
               <Grid item md={8} xs={12}>
-                <TextField
-                  label="End Time"
-                  id="event_end_time"
-                  value={event.end_time}
-                  onChange={this.handleEndTimeChange}
-                  margin="normal"
-                  fullWidth
-                />
-              </Grid>
-              <Grid item md={8} xs={12}>
                   <TextField
                     label="Quantity of people"
                     id="event_quantity"
                     value={event.quantity}
                     onChange={this.handleQuantityChange}
+                    margin="normal"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item md={8} xs={12}>
+                  <TextField
+                    label="Description"
+                    id="event_end_time"
+                    value={event.description}
+                    onChange={this.handleDescriptionChange}
                     margin="normal"
                     fullWidth
                   />

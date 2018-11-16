@@ -59,9 +59,9 @@ class NewEvent extends Component {
         event: {
           event_date: event_new.event_date,
           start_time: event_new.start_time,
-          end_time: event_new.end_time,
           quantity: event_new.quantity,
-          notification: event_new.notification
+          notification: event_new.notification,
+          description: event_new.description
         },
         location: {
           id: this.state.loc,
