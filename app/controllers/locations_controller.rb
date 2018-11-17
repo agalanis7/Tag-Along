@@ -24,4 +24,27 @@ class LocationsController < ApplicationController
       end
     end
   end
+
+  def show
+    activity = Activity.find_by(name: params[:id].titleize)
+    locations = activity.locations
+
+    render json:  {
+                   type: "FeatureCollection",
+                   features: locations.map do |location|
+                     {
+                       type: "Feature",
+                       geometry: {
+                         type: "Point",
+                         coordinates: [location.longitude, location.latitude]
+                       },
+                       properties: {
+                         name: location.name,
+                         id: location.id
+                       }
+                     }
+                   end
+                 }
+
+  end
 end
