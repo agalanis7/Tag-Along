@@ -46,7 +46,6 @@ import Popup from './Popup.jsx'
          trackUserLocation: true
        })
      )
-
      map.addControl(
        new mapboxgl.NavigationControl({
          positionOption: geolocationOptions,
@@ -56,8 +55,72 @@ import Popup from './Popup.jsx'
 
      map.on('load', (event) => {
        this.fetchLocations()
-     })
-   }
+
+          map.addSource('basketball', {
+            type: 'geojson',
+            data: `/locations/basketball`
+          });
+          map.addLayer({
+            'id': 'baskeball',
+            'type': 'circle',
+            'source': 'basketball',
+            'layout': {
+              'visibility': 'visible'
+            }
+          })
+
+          map.addSource('tennis', {
+            type: 'geojson',
+            data: `/locations/tennis`
+          });
+          map.addLayer({
+            'id': 'tennis',
+            'type': 'circle',
+            'source': 'tennis',
+            'layout': {
+              'visibility': 'visible'
+            }
+          })
+
+          map.addSource('baseball', {
+            type: 'geojson',
+            data: `/locations/baseball`
+          });
+          map.addLayer({
+            'id': 'baseball',
+            'type': 'circle',
+            'source': 'baseball',
+            'layout': {
+              'visibility': 'visible'
+            }
+          })
+
+          map.addSource('biking', {
+            type: 'geojson',
+            data: `/locations/biking`
+          });
+          map.addLayer({
+            'id': 'biking',
+            'type': 'circle',
+            'source': 'biking',
+            'layout': {
+              'visibility': 'visible'
+            }
+          })
+
+          map.addSource('golf', {
+            type: 'geojson',
+            data: `/locations/golf`
+          });
+          map.addLayer({
+            'id': 'golf',
+            'type': 'circle',
+            'source': 'golf',
+            'layout': {
+              'visibility': 'visible'
+        }})
+    })}
+
 
    fetchLocations = () => {
      const map = this.map;
@@ -82,6 +145,7 @@ import Popup from './Popup.jsx'
      })
    }
 
+
    componentDidUpdate() {
      console.log(this.props.locs)
    }
@@ -102,8 +166,10 @@ import Popup from './Popup.jsx'
        </div>
      )
    }
+ }
 
-}
+
+
 
 
 export default Map
