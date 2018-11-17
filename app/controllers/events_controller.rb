@@ -15,7 +15,7 @@ class EventsController < ApplicationController
       elsif params[:events] == "locations"
         format.json{render json: @events.map{|e| e.location}}
       end
-    
+
 end
   end
 
@@ -29,8 +29,9 @@ end
     respond_to do |format|
       format.html
       format.json{render json: @event.participants.map{|p| p.profile }}
+      end
     end
-  end
+  
 
   # GET /events/new
   def new
