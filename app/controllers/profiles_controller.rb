@@ -31,16 +31,20 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @profile = Profile.new(profile_params)
-    if @profile.save
+    activities = params[:profile][:activity_id].split(",")
+    @profile = Profile.new
+    @profile.first_name = params[:profile][:first_name]
+    @profile.last_name = params[:profile][:last_name]
+    @profile.gender = params[:profile][:gender]
+    @profile.notification = params[:profile][:notification]
+    @profile.image = params[:profile][:image]
+    @profile.user = current_user
+    @profile.save
       @profile.user.user_activities.delete_all
-      params[:user_activity][:activity_id].each do |activity_id|
+      activities.each do |activity_id|
         @profile.user.user_activities.find_or_create_by(activity_id: activity_id)
       end
       render json: @profile
-    else
-      render json: @profile.errors.full_messages, status: 400
-    end
   end
 
   # GET /profiles/1/edit
