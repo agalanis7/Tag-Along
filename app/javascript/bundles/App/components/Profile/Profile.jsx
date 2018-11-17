@@ -7,14 +7,13 @@ class Profile extends Component {
     super()
   }
   componentDidMount() {
-    console.log(this.props.user)
-    console.log(this.props.events)
-    console.log(this.props.activities)
-    console.log(this.props.profile)
+    
   }
   render() {
     return (
-      <div>HELLO WORLD</div>
+      <div>HELLO
+        <img src={this.props.profile.image}/>
+      </div>
     )
   }
 }

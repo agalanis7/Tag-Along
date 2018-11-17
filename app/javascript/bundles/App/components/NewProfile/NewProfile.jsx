@@ -10,12 +10,19 @@ const headers = {
         'X-CSRF-TOKEN':     token
       }
 
+const image_headers = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN':     token,
+            'content-type':     'multipart/form-data'
+  }
+
 class Profile extends Component {
   constructor() {
     super()
     this.state = {
       profiles: [],
       activities: [],
+      image: ''
     }
   }
   async componentDidMount() {
@@ -28,27 +35,15 @@ class Profile extends Component {
     profile.user_id = this.props.user.id;
     console.log(profile)
     console.log("this is profile?");
-    axios.post('/profiles.json', {
-      profile: {
-        first_name: profile.first_name,
-        last_name: profile.last_name,
-        gender: profile.gender,
-        phone_number: profile.phone_number,
-        notification: profile.notification,
-        user_id: profile.user_id,
-      },
-      user_activity:{
-        activity_id: profile.activity_id
-      }
-    },
-    {headers: headers})
+    axios.post('/profiles.json', profile,
+    {headers: image_headers})
     .then((response) => {
       console.log("THIS IS WHAT IS GETTING SENT UP")
       console.log(profile)
       let { profiles } = this.state;
       profiles.push(response.data);
       this.setState({ profiles })
-      Turbolinks.visit('/events')
+      // Turbolinks.visit('/events')
     })
   }
   render() {

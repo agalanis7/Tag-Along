@@ -19,9 +19,12 @@ class Form extends Component {
         last_name: '',
         gender: '',
         notification: '',
+        image: '',
         activity_id: []
       },
-      activities: []
+      activities: [],
+      name: '',
+      image: ''
     }
 
   }
@@ -49,10 +52,25 @@ class Form extends Component {
     this.setState({ profile });
   }
 
+  handleImageChange = event => {
+    let { profile } = this.state
+    const image = event.target.files[0]
+    profile.image = image
+    this.setState({ profile })
+  }
+
+
   handleSubmit = (event) => {
     event.preventDefault();
-    let { profile, activities } = this.state;
-    this.props.createProfile(profile)
+    let { profile, activities, image } = this.state;
+    const formData = new FormData()
+    formData.append('profile[first_name]', profile.first_name)
+    formData.append('profile[last_name]', profile.last_name)
+    formData.append('profile[gender]', profile.gender)
+    formData.append('profile[notification]', profile.notification)
+    formData.append('profile[image]', profile.image)
+    formData.append('profile[activity_id]', profile.activity_id)
+    this.props.createProfile(formData)
     profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: [] }
     this.setState({ profile })
     Turbolinks.visit('/events/index')
@@ -115,13 +133,21 @@ class Form extends Component {
                     fullWidth
                   />
                 </Grid>
+              <Grid item md={8} xs={12}>
+                <label htmlFor='image'>Image</label>
+                <input
+                  name='image'
+                  type='file'
+                  onChange={this.handleImageChange}
+                />
+                </Grid>
           </Grid>
           <Button
             variant="contained"
             color="primary"
             onClick={ this.handleSubmit }
           >
-      
+
             Create Profiles
           </Button>
           {

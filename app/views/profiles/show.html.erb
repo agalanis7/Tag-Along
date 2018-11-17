@@ -1,4 +1,6 @@
 <%=
   react_component 'Profile',
-  props: { profile: @profile, user: @user, activities: @activities, events: @events } 
+  props: { profile: @profile.attributes.merge(
+    image: url_for(@profile.image)
+    ), user: @user, activities: @activities, events: @events }
 %>
