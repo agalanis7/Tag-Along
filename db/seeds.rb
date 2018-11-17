@@ -154,7 +154,7 @@ ActivityLocation.create(activity: volleyball, location: volleyball_field_4)
    ev =  Event.new(
      event_date:    Faker::Date.between(2.days.ago, Date.today),
      start_time:    Faker::Time.between(2.days.ago, Date.today, :morning),
-     end_time:      Faker::Time.between(2.days.ago, Date.today, :evening),
+     description:  Faker::Lorem.sentence(3)
 
    )
    ev.user = User.first

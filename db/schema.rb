@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2018_11_17_000049) do
     t.string "last_name"
     t.string "gender"
     t.string "phone_number"
-    t.integer "notification"
+    t.boolean "notification"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"

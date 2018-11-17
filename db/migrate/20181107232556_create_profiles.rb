@@ -6,7 +6,7 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :gender
       t.string :email
       t.string :phone_number
-      t.integer :notification
+      t.boolean :notification
 
       t.timestamps
     end
