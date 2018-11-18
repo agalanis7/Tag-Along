@@ -14,8 +14,8 @@
 /* @import "bootstrap"; */
 
 
-.markers {
-  background-color: red !important;
+.basketball {
+  background-image: url('http://andreasgalanis.com/bball.png');
   background-size: cover !important;
   width: 20px !important;
   height:20px !important;

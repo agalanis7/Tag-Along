@@ -56,81 +56,88 @@ import Popup from './Popup.jsx'
      map.on('load', (event) => {
        this.fetchLocations()
 
-          map.addSource('basketball', {
-            type: 'geojson',
-            data: `/locations/basketball`
-          });
-          map.addLayer({
-            'id': 'baskeball',
-            'type': 'circle',
-            'source': 'basketball',
-            'layout': {
-              'visibility': 'visible'
-            }
-          })
+        //   map.addSource('basketball', {
+        //     type: 'geojson',
+        //     data: `/locations/basketball`
+        //   });
+        //   map.addLayer({
+        //     'id': 'baskeball',
+        //     'type': 'circle',
+        //     'source': 'basketball',
+        //     'layout': {
+        //       'visibility': 'visible'
+        //     }
+        //   })
 
-          map.addSource('tennis', {
-            type: 'geojson',
-            data: `/locations/tennis`
-          });
-          map.addLayer({
-            'id': 'tennis',
-            'type': 'circle',
-            'source': 'tennis',
-            'layout': {
-              'visibility': 'visible'
-            }
-          })
+        //   map.addSource('tennis', {
+        //     type: 'geojson',
+        //     data: `/locations/tennis`
+        //   });
+        //   map.addLayer({
+        //     'id': 'tennis',
+        //     'type': 'circle',
+        //     'source': 'tennis',
+        //     'layout': {
+        //       'visibility': 'visible'
+        //     }
+        //   })
 
-          map.addSource('baseball', {
-            type: 'geojson',
-            data: `/locations/baseball`
-          });
-          map.addLayer({
-            'id': 'baseball',
-            'type': 'circle',
-            'source': 'baseball',
-            'layout': {
-              'visibility': 'visible'
-            }
-          })
+        //   map.addSource('baseball', {
+        //     type: 'geojson',
+        //     data: `/locations/baseball`
+        //   });
+        //   map.addLayer({
+        //     'id': 'baseball',
+        //     'type': 'circle',
+        //     'source': 'baseball',
+        //     'layout': {
+        //       'visibility': 'visible'
+        //     }
+        //   })
 
-          map.addSource('biking', {
-            type: 'geojson',
-            data: `/locations/biking`
-          });
-          map.addLayer({
-            'id': 'biking',
-            'type': 'circle',
-            'source': 'biking',
-            'layout': {
-              'visibility': 'visible'
-            }
-          })
+        //   map.addSource('biking', {
+        //     type: 'geojson',
+        //     data: `/locations/biking`
+        //   });
+        //   map.addLayer({
+        //     'id': 'biking',
+        //     'type': 'circle',
+        //     'source': 'biking',
+        //     'layout': {
+        //       'visibility': 'visible'
+        //     }
+        //   })
 
-          map.addSource('golf', {
-            type: 'geojson',
-            data: `/locations/golf`
-          });
-          map.addLayer({
-            'id': 'golf',
-            'type': 'circle',
-            'source': 'golf',
-            'layout': {
-              'visibility': 'visible'
-        }})
+        //   map.addSource('golf', {
+        //     type: 'geojson',
+        //     data: `/locations/golf`
+        //   });
+        //   map.addLayer({
+        //     'id': 'golf',
+        //     'type': 'circle',
+        //     'source': 'golf',
+        //     'layout': {
+        //       'visibility': 'visible'
+        // }})
     })}
 
 
    fetchLocations = () => {
+        //events.forEach() event in events
+    
+    
+    
+    
+    //console.log(this.props.events[0].description)
      const map = this.map;
      let newMarkers = this.props.locs
+     console.log('WOWWWW' +this.props.locs)
      newMarkers.forEach((loc, i) => {
        let elm = document.createElement('div')
-       elm.className = "markers"
+       elm.className = "basketball"
        let popup = new mapboxgl.Popup({ offset: 25})
        .setHTML(ReactDOMServer.renderToStaticMarkup(
-         <Popup loc={loc}></Popup>
+         <Popup events={this.props.events[i]} loc={loc}></Popup>
        ))
        popup.on('open', (e) => {
          document.getElementById(`${loc.id}`).addEventListener('click', function() {
@@ -147,7 +154,7 @@ import Popup from './Popup.jsx'
 
 
    componentDidUpdate() {
-     console.log(this.props.locs)
+     console.log(this.props.events)
    }
 
    componentWillUnmount() {

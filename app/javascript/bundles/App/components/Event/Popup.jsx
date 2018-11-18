@@ -9,7 +9,7 @@ class Popup extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.loc.name}</p>
+        <p>{this.props.events.description}</p>
         <button id={this.props.loc.id} onClick={this.handleClick}>Show Event</button>
       </div>
     )
