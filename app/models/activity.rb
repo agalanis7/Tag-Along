@@ -4,7 +4,7 @@ class Activity < ApplicationRecord
   has_many :activity_locations, dependent: :destroy
   has_many :locations, through: :activity_locations
   has_one  :activity_event, dependent: :destroy
-  has_one :event, through: :activity_event
+  has_many :events, through: :activity_event
 
   scope :loc_basketball, -> { find_by(name: "Basketball").locations }
   scope :loc_biking, -> { find_by(name: "Biking").locations }

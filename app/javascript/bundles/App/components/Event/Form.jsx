@@ -28,6 +28,7 @@ class Form extends Component {
       quantity: '',
       notification: '',
       description: '',
+      title: '',
       activity_id: ''
 
     },
@@ -45,6 +46,12 @@ class Form extends Component {
     let { event_new } = this.state;
     event_new.start_time = event.target.value;
     this.setState({ event_new});
+  }
+
+  handleTitleChange = (event) => {
+    let { event_new } = this.state;
+    event_new.title = event.target.value;
+    this.setState({ event_new });
   }
 
   handleDescriptionChange = (event) => {
@@ -103,7 +110,16 @@ handleLocation = (location, activity ) => {
           onSubmit={ this.handleSubmit }
         >
           <Grid container spacing={40}>
-
+            <Grid item md={8} xs={12}>
+              <TextField
+                label="Title"
+                id="event_title"
+                value={event.event_title}
+                onChange={this.handleTitleChange}
+                margin="normal"
+                fullWidth
+              />
+            </Grid>
             <Grid item md={8} xs={12}>
               <TextField
                 label="Date"

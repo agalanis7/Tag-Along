@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import Form from './Form'
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
 import Map from './Map'
+import NavBar from '../NavBar'
 
 const handleCreateEvent = () => {
   Turbolinks.visit('/events/new')
@@ -30,6 +30,8 @@ class Events extends Component {
     const { events, locations } = this.state
     return(
       <div>
+        <NavBar/>
+        }
         <h1>THESE ARE MY EVENTS</h1>
         <Map locs={locations} />
         {
