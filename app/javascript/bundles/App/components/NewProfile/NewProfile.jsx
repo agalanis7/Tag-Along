@@ -33,13 +33,11 @@ class Profile extends Component {
 
   createProfile = (profile) => {
     profile.user_id = this.props.user.id;
-    console.log(profile)
-    console.log("this is profile?");
+    console.log(`The profile before the PostReq in createProfile:\n ${profile}`)
     axios.post('/profiles.json', profile,
     {headers: image_headers})
     .then((response) => {
-      console.log("THIS IS WHAT IS GETTING SENT UP")
-      console.log(profile)
+      console.log(`The profile after the PostReq in createProfile:\n ${profile}`)
       let { profiles } = this.state;
       profiles.push(response.data);
       this.setState({ profiles })

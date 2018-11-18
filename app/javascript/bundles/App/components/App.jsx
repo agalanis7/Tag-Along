@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+import { render } from 'react-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Welcome from './Welcome/Welcome.jsx'
 import Info from './Welcome/Info.jsx'
-import NavBar from './NavBar.js'
+
+const theme = createMuiTheme();
+
 
 class App extends Component {
  state = { step: 1 }
@@ -32,10 +36,11 @@ class App extends Component {
 
 render(){
   return(
-    <div>
-      <NavBar/>
-        { this.infoOrWelcome() }
-    </div>
+    <MuiThemeProvider theme={theme}>
+       <div>
+         { this.infoOrWelcome() }
+       </div>
+    </MuiThemeProvider>
   )
  }
 }

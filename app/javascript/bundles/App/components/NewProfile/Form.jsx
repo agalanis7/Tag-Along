@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 // import { Button, Label, Collapse, CardBody, Card } from 'reactstrap';
 import { withStyles } from '@material-ui/core/styles';
 import TagDropdown from './TagDropdown.js'
-import NavBar from '../NavBar.js'
 import Button from '@material-ui/core/Button'
+import Notification from './Notification'
 
 
 class Form extends Component {
@@ -26,7 +26,6 @@ class Form extends Component {
       name: '',
       image: ''
     }
-
   }
 
   handleFirstNameChange = (event) => {
@@ -46,9 +45,11 @@ class Form extends Component {
     profile.gender = event.target.value;
     this.setState({ profile });
   }
+
   handleNotificationChange = (event) => {
+    console.log(`Inside handleNotificationChange event: ${event}`)
     let { profile } = this.state;
-    profile.notification = event.target.value;
+    profile.notification = event
     this.setState({ profile });
   }
 
@@ -58,7 +59,6 @@ class Form extends Component {
     profile.image = image
     this.setState({ profile })
   }
-
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -89,10 +89,8 @@ class Form extends Component {
 
   render() {
     const { profile } = this.state;
-    console.log(profile)
     return (
     <div>
-      <NavBar/>
       <Paper style={{margin: 10, padding: 10}}>
         <form
           style={{display: 'flex', flexWrap: 'wrap'}}
@@ -100,7 +98,6 @@ class Form extends Component {
           onSubmit={ this.handleSubmit }
         >
           <Grid container spacing={40}>
-
             <Grid item md={8} xs={12}>
               <TextField
                 label="First Name"
@@ -125,15 +122,8 @@ class Form extends Component {
               <TagDropdown handleGenderChange={this.handleGenderChange}/>
               </Grid>
               <Grid item md={8} xs={12}>
-                  <TextField
-                    label="Notification type"
-                    id="profile_notification"
-                    value={profile.notification}
-                    onChange={this.handleNotificationChange}
-                    margin="normal"
-                    fullWidth
-                  />
-                </Grid>
+                <Notification handleNotificationChange={this.handleNotificationChange} notification={this.state.notification} />
+              </Grid>
               <Grid item md={8} xs={12}>
                 <label htmlFor='image'>Image</label>
                 <input
@@ -148,12 +138,10 @@ class Form extends Component {
             color="primary"
             onClick={ this.handleSubmit }
           >
-
             Create Profiles
           </Button>
           {
             this.props.activities.map((activity, index) => {
-              console.log(activity.id)
               return (
                 <div key={index}>
                   <Button

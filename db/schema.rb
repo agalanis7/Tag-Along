@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_000049) do
+ActiveRecord::Schema.define(version: 2018_11_17_180450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,16 +61,17 @@ ActiveRecord::Schema.define(version: 2018_11_17_000049) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.date "event_date"
-    t.time "start_time"
+    t.date "event_date", null: false
+    t.string "start_time", null: false
     t.integer "quantity"
     t.integer "notification"
-    t.boolean "completed", default: false, null: false
+    t.boolean "completed", default: false
     t.bigint "location_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.string "title", null: false
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -99,11 +100,10 @@ ActiveRecord::Schema.define(version: 2018_11_17_000049) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "gender"
-    t.string "phone_number"
-    t.boolean "notification"
+    t.boolean "notification", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
