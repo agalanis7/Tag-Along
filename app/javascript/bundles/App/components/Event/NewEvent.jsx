@@ -61,7 +61,8 @@ class NewEvent extends Component {
           start_time: event_new.start_time,
           quantity: event_new.quantity,
           notification: event_new.notification,
-          description: event_new.description
+          description: event_new.description,
+          title: event_new.title
         },
         location: {
           id: this.state.loc,
@@ -89,7 +90,7 @@ class NewEvent extends Component {
             </div>
           )
         })}
-        <button onClick={this.testingParticipant}>Create me</button>
+
       </div>
     )
   }

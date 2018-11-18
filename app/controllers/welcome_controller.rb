@@ -1,9 +1,7 @@
 class WelcomeController < ApplicationController
   before_action :require_login
 
-  def show
-  end
-  def info
+  def index
   end
 
   private

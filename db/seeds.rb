@@ -151,16 +151,15 @@ ActivityLocation.create(activity: volleyball, location: volleyball_field_4)
 
 20.times do
    loc = Location.pluck(:id).sample
-   ev =  Event.new(
+   ev =  Event.create!(
+     title:         Faker::Lorem.sentence,
      event_date:    Faker::Date.between(2.days.ago, Date.today),
      start_time:    Faker::Time.between(2.days.ago, Date.today, :morning),
-     description:  Faker::Lorem.sentence(3)
-
+     description:   Faker::Lorem.sentence(3),
+     user:          User.first,
+     location:      Location.find(loc),
+     activity:      Location.find(loc).activity.first
    )
-   ev.user = User.first
-   ev.location = Location.find(loc)
-   ev.activity = Location.find(loc).activity.first
-   ev.save
  end
 
  p "number of events: #{Event.all.count}"
