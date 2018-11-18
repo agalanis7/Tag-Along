@@ -5,18 +5,32 @@ class EventsController < ApplicationController
   # GET /events    @activities = Activity.all
   # GET /events.json
   def index
+    @events = Event.joins(:location)
     respond_to do |format|
       format.html do
         @event = Event.new
       end
-      @events = Event.all
-      if params[:events] == "events"
-        format.json{render json: @events}
-      elsif params[:events] == "locations"
-        format.json{render json: @events.map{|e| e.location}}
+      format.json do
+      render json: {
+                     type: "FeatureCollection",
+                     features: @events.map do |event|
+                       {
+                         type: "Feature",
+                         geometry: {
+                           type: "Point",
+                           coordinates: [event.location.longitude, event.location.latitude]
+                         },
+                         properties: {
+                           id: event.id,
+                           event_type: event.location.location_type
+                         }
+                       }
+                     end
+                   }
       end
 
-end
+
+    end
   end
 
   # GET /events/1
@@ -31,7 +45,7 @@ end
       format.json{render json: @event.participants.map{|p| p.profile }}
       end
     end
-  
+
 
   # GET /events/new
   def new

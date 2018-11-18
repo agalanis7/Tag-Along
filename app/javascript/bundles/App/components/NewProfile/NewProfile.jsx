@@ -43,7 +43,7 @@ class Profile extends Component {
       let { profiles } = this.state;
       profiles.push(response.data);
       this.setState({ profiles })
-      // Turbolinks.visit('/events')
+      Turbolinks.visit('/events')
     })
   }
   render() {

@@ -16,25 +16,23 @@ class Events extends Component {
       locations: []
     }
   }
-  async componentDidMount() {
-    let { data } = await axios.get('/events.json?events=events')
-    let locs = await axios.get(`/events.json?events=locations`)
-    this.setState({ events: data, locations: locs.data })
- 
+  componentDidMount() {
+    axios.get('/events.json').then((response) => {
+      this.setState({ events: response.data.features })
+    })
   }
-    
+
 
   handleEvent = (eventId) => {
     Turbolinks.visit(`/events/${eventId}`)
   }
 
   render(){
-    const { events, locations } = this.state
-    console.log('IIIIII' + locations)
+    const { events } = this.state
     return(
       <div>
         <h1>THESE ARE MY EVENTS</h1>
-        <Map events={events} locs={locations} />
+        <Map events={events} />
         {
           events.map((event) => {
             return (
