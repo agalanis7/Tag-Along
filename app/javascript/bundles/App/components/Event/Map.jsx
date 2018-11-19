@@ -19,8 +19,7 @@ import Popup from './Popup.jsx'
      //     this.toggleVisibility(activity)
      //   }
      // })
-      mapboxgl.accessToken = 'pk.eyJ1Ijoic3RvbW15NDkiLCJhIjoiY2pqcm1ub3F3OG03dTNxbzZ6ZXJ4NHExaiJ9.4aFNxi2NordCBv36GUI3Mw'
-
+      mapboxgl.accessToken = `pk.eyJ1IjoiYWdhbGFuaXM3IiwiYSI6ImNqbmFvOXE1YTIxeDAzcGxkdmxrbXRuYTUifQ.GAvil-V1zDFmEI2QMAIW3Q`
       //OPTIONS FOR BUILT IN GEOLOCATOR BUTTON
       const geolocationOptions = {
       //Tells Geocoder to use gps locating over ip locating
@@ -34,7 +33,7 @@ import Popup from './Popup.jsx'
       const mapOptions = {
         //DEFINES CONTAINER
         container: this.mapContainer,
-        style: `mapbox://styles/stommy49/cjonjyvyh2wnb2rphdovq7ide`,
+        style: `mapbox://styles/agalanis7/cjonn3677227c2so4jcn3t5um`,
         zoom: 12,
         center: [-80.2044, 25.8028]
       }
@@ -63,12 +62,12 @@ import Popup from './Popup.jsx'
        this.fetchLocs()
 
       const icons = {
-        basketball: "basketball_art",
-        tennis: "inkscape-small",
-        baseball: "aquarium-15",
-        golf: "campsite-15",
+        basketball: "basketball",
+        tennis: "tennis",
+        baseball: "baseball",
+        golf: "golf",
         biking: "bicycle-15",
-        volleyball: "car-15"
+        volleyball: "volleyball"
       }
 
       map.addSource(
