@@ -156,9 +156,10 @@ class Form extends Component {
     formData.append('profile[image]', profile.image)
     formData.append('profile[activity_id]', profile.activity_id)
     this.props.createProfile(formData)
-    profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: [] }
-    this.setState({ profile })
-    Turbolinks.visit('/events')
+    // AW it is not a good idea to set state more than once in a function vv
+    // profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: [] }
+    // this.setState({ profile })
+    // Turbolinks.visit('/events')
   }
 
   handleChange = (activityId) => {

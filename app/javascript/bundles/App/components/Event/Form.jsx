@@ -132,7 +132,7 @@ handleLocation = (location, activity ) => {
             </Grid>
             <Grid item md={4} xs={12}>
               <TextField
-                label="Satrt Time"
+                label="Start Time"
                 id="event_start_time"
                 value={event.start_time}
                 onChange={this.handleStartTimeChange}
