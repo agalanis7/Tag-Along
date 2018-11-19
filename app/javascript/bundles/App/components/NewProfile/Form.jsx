@@ -96,13 +96,12 @@ cssLabel: {
 class Form extends Component {
   constructor(props) {
     super(props)
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
       profile: {
         first_name: '',
         last_name: '',
         gender: '',
-        notification: '',
+        notification: false,
         image: '',
         activity_id: []
       },
@@ -157,15 +156,17 @@ class Form extends Component {
     formData.append('profile[activity_id]', profile.activity_id)
     this.props.createProfile(formData)
     // AW it is not a good idea to set state more than once in a function vv
-    // profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: [] }
-    // this.setState({ profile })
-    // Turbolinks.visit('/events')
+    profile = { first_name: '', last_name: '', gender: '', notification: '', activity_id: [] }
+    this.setState({ profile })
+    Turbolinks.visit('/events')
   }
 
   handleChange = (activityId) => {
     let { profile, activities } = this.state
+    console.log(`U are in handleChange ${activityId}`);
     if(!profile.activity_id.includes(activityId)){
       profile.activity_id.push(activityId)
+        console.log(`U are in IF  ${activity_id}`);
     }else{
       profile.activity_id = profile.activity_id.filter(id => id !== activityId)
     }
@@ -240,11 +241,10 @@ class Form extends Component {
                    Profile picture
                   </Typography>
                   <input
-                       accept="image/*"
                        className={classes.input}
                        id="outlined-button-file"
                        multiple
-                       name='image' type='file' onSubmit={this.handleImageChange}
+                       name='image' type='file' onChange={this.handleImageChange}
                      />
                  <label htmlFor="outlined-button-file">
                    <Button variant="outlined" component="span" className={classes.button}>
@@ -254,6 +254,7 @@ class Form extends Component {
                   </div>
                 </Grid>
                  <Grid item md={8} xs={12} className={classes.bigDiv}>
+
                   {
                     this.props.activities.map((activity, index) => {
                       return (
@@ -262,7 +263,7 @@ class Form extends Component {
                           <Button
                             type="button"
                             key={index} onClick={ (e) => { this.handleChange(activity.id) } }
-                            value={activity.id} key={`index`}
+                            value={activity.id}
                             variant={ this.state.profile.activity_id.includes(activity.id) ? "contained" : "outlined" }
                             className={ classNames(this.state.profile.activity_id.includes(activity.id) ? (classes.inActiveBt) : (classes.activeBt)) }
                             color="default"

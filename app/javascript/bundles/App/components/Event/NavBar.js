@@ -13,12 +13,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-const handleProfile = () => {
-  Turbolinks.visit(`/profiles/${id}`)
-}
-const handleAccount = () => {
-  Turbolinks.visit('/users/edit')
-}
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -30,7 +25,13 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  bar: {
+    background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
+    color: 'white',
+    fontWeight: 'bold',
+  },
 };
+
 
 class NavBar extends React.Component {
   state = {
@@ -46,8 +47,17 @@ class NavBar extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  handleCloseProfile = () => {
+    this.setState({ anchorEl: null })
+    Turbolinks.visit(`/profiles/${props.user.id}`)
+  };
+  handleCloseAccount = () => {
+    this.setState({ anchorEl: null })
+    Turbolinks.visit('/users/edit')
+  };
+  handleCloseLogOut = () => {
+    this.setState({ anchorEl: null })
+    Tirbolinks.visit(`/users/sign_out`)
   };
 
   render() {
@@ -57,21 +67,13 @@ class NavBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
-        </FormGroup>
-        <AppBar position="static">
+        <AppBar position="fixed" className={classes.bar}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              Photos
+              Events
             </Typography>
             {auth && (
               <div>
@@ -97,8 +99,9 @@ class NavBar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleCloseProfile}>Profile</MenuItem>
+                  <MenuItem onClick={this.handleCloseAccount}>My account</MenuItem>
+                  <MenuItem onClick={this.handleCloseLogOut} >Log Out</MenuItem>
                 </Menu>
               </div>
             )}
