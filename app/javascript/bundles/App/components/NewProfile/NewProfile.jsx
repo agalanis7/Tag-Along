@@ -16,6 +16,15 @@ const image_headers = {
             'content-type':     'multipart/form-data'
   }
 
+  const style = {
+  padding: '5px',
+  background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
+  borderRadius: 3,
+  border: 0,
+  color: 'white',
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+};
+
 class Profile extends Component {
   constructor() {
     super()
@@ -45,8 +54,9 @@ class Profile extends Component {
     })
   }
   render() {
+    const { classes } = this.state
     return (
-      <div>
+      <div style={style}>
         <Form createProfile={this.createProfile} activities={this.state.activities} />
       </div>
     )

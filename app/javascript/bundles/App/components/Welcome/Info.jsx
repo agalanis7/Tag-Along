@@ -47,7 +47,17 @@ const styles = theme => ({
     },
     color: 'white',
     fontWeight: 'bold',
+    width: 100,
   },
+  smBt: {
+    background: 'linear-gradient(45deg, #CCFF90 30%, #B2FF59 90%)',
+    '&:hover': {
+      background: '#33691E',
+    },
+      width: 100,
+      color: 'white',
+      fontWeight: 'bold',
+  }
 });
 
 class Info extends Component {
@@ -83,10 +93,10 @@ class Info extends Component {
       </Grid>
       <Grid item xs container direction="row" justify="space-around" spacing={16} style={{ paddingTop: 60 }}>
          <Grid item sm={12} >
-           <Button onClick={handleSignUp}>Skip</Button>
+           <Button className={classes.smBt} onClick={handleSignUp}>Skip</Button>
           </Grid>
           <Grid item sm={12}>
-           <Button color="primary" onClick={handleSignUp} className={classes.cssRoot}>Sign up</Button>
+           <Button onClick={handleSignUp} className={classes.cssRoot}>Sign up</Button>
           </Grid>
       </Grid>
     </Grid>
