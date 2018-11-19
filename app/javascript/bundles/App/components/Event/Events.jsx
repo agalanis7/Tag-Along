@@ -45,7 +45,7 @@ class Events extends Component {
           <NavBar/>
           <h2 style={{padding: 10}} >Welcome to TagAlong</h2>
 
-          <Map events={events} />
+          <Map events={events} activities={this.props.activities} />
           {
             events.map((event) => {
               return (

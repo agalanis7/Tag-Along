@@ -14,10 +14,10 @@ const styles = theme => ({
 })
 
  class Map extends Component {
-   constructor() {
+   constructor(props) {
      super()
      this.state = {
-       on: ["basketball", "baseball", "tennis", "golf", "biking", "volleyball"]
+       on: props.activities
      }
    }
 
@@ -156,7 +156,7 @@ const styles = theme => ({
      };
      return (
        <div>
-          <Paper style={{margin: 10, padding: 10}}>
+          <div style={{margin: 10, padding: 10, backgroundColor: 'blue'}}>
              <ul>
               <li onClick={ () => { this.toggleVisibility("basketball") } }>Basketball <span>{this.state.on.includes("basketball") ? "On" : "Off"}</span></li>
               <li onClick={ () => { this.toggleVisibility("biking") } }>Biking <span>{this.state.on.includes("biking") ? "On" : "Off"}</span></li>
@@ -165,7 +165,7 @@ const styles = theme => ({
               <li onClick={ () => { this.toggleVisibility("golf") } }>Golf <span>{this.state.on.includes("golf") ? "On" : "Off"}</span></li>
               <li onClick={ () => { this.toggleVisibility("volleyball") } }>Volleyball <span>{this.state.on.includes("volleyball") ? "On" : "Off"}</span></li>
              </ul>
-          </Paper>
+          </div>
 
           <div id="map" style={style} ref={el => this.mapContainer = el} />
        </div>

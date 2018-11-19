@@ -166,7 +166,6 @@ class Form extends Component {
     console.log(`U are in handleChange ${activityId}`);
     if(!profile.activity_id.includes(activityId)){
       profile.activity_id.push(activityId)
-        console.log(`U are in IF  ${activity_id}`);
     }else{
       profile.activity_id = profile.activity_id.filter(id => id !== activityId)
     }
