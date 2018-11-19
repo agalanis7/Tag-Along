@@ -33,6 +33,7 @@ class Events extends Component {
       <div>
         <NavBar/>
         }
+
         <h1>THESE ARE MY EVENTS</h1>
         <Map events={events} />
         {
@@ -40,7 +41,7 @@ class Events extends Component {
             return (
               <div key={event.id}>
                 Event ID:{event.id}
-                <button onClick={(e) => { this.handleEvent(event.id) } }>JOIN ME</button>
+                <button onClick={(e) => { this.handleEvent(event.id) } }>TAG ALONG</button>
                 <hr/>
               </div>
             )
