@@ -22,7 +22,7 @@ class EventsController < ApplicationController
                          },
                          properties: {
                            id: event.id,
-                           event_type: event.location.location_type
+                           event_type: event.location.location_type,
                          }
                        }
                      end
