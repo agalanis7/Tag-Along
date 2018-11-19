@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Welcome from './Welcome/Welcome.jsx'
 import Info from './Welcome/Info.jsx'
 
-const theme = createMuiTheme();
+
 
 
 class App extends Component {
@@ -36,11 +35,9 @@ class App extends Component {
 
 render(){
   return(
-    <MuiThemeProvider theme={theme}>
        <div>
          { this.infoOrWelcome() }
        </div>
-    </MuiThemeProvider>
   )
  }
 }

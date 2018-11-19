@@ -31,13 +31,10 @@ const styles = theme => ({
 });
 
 class Notification extends React.Component {
-  state = {
-    notification: false
-  };
 
   handleChange = event => {
     this.setState({ notification: event.target.value})
-    if (this.state.notification) {
+    if (this.props.notification) {
       this.props.handleNotificationChange(event.target.value)
     }
     console.log(`Inside the handleChange ${event.target.value}`)
@@ -56,7 +53,7 @@ class Notification extends React.Component {
           <RadioGroup
             aria-label="notification"
             name="notifications"
-            value={ this.state.notification }
+            value={ this.props.notification }
           >
             <FormControlLabel
               value="true"
@@ -65,7 +62,7 @@ class Notification extends React.Component {
               onChange={ this.handleChange }
             />
             <FormControlLabel
-              value=""
+              value="false"
               control={<Radio className={classNames(classes.radio, classes.checked, classes.label)} />}
               label="Do Not Get"
               onChange={ this.handleChange }
