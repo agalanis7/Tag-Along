@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import Input from '@material-ui/core/Input';
 import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
+import Typography from '@material-ui/core/Typography';
 
 
 import Notification from './Notification'
@@ -85,6 +86,10 @@ cssLabel: {
      borderBottomColor: green[700],
    },
  },
+ instructions: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+  },
 });
 
 
@@ -178,7 +183,7 @@ class Form extends Component {
           onSubmit={ this.handleSubmit }
         >
           <Grid container spacing={40}>
-            <Grid item md={8} xs={12}>
+            <Grid item md={8} xs={12} >
               <TextField
                 InputLabelProps={{
                      classes: {
@@ -229,22 +234,22 @@ class Form extends Component {
                 <Notification handleNotificationChange={this.handleNotificationChange} notification={this.state.profile.notification} />
               </Grid>
               <Grid item md={8} xs={12}>
-                <div>
-
+                <div style={{display:'inline-flex', }}>
+                  <Typography className={classes.instructions}>
+                   Profile picture
+                  </Typography>
                   <input
-         accept="image/*"
-         className={classes.input}
-         id="outlined-button-file"
-         multiple
-         name='image' type='file' onSubmit={this.handleImageChange}
-       />
-       <label htmlFor="outlined-button-file">
-         <Button variant="outlined" component="span" className={classes.button}>
-           Upload
-         </Button>
-              </label>
-
-
+                       accept="image/*"
+                       className={classes.input}
+                       id="outlined-button-file"
+                       multiple
+                       name='image' type='file' onSubmit={this.handleImageChange}
+                     />
+                 <label htmlFor="outlined-button-file">
+                   <Button variant="outlined" component="span" className={classes.button}>
+                     Upload
+                   </Button>
+                  </label>
                   </div>
                 </Grid>
                  <Grid item md={8} xs={12} className={classes.bigDiv}>

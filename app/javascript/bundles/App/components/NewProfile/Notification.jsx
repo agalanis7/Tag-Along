@@ -7,12 +7,24 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import classNames from 'classnames';
-
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
   root: {
     display: 'flex',
   },
+  radio: {
+    color: green[600],
+  },
+  label: {
+    '&$checked': {
+      color: green[700],
+    },
+  },
+  name: {
+      color: green[800],
+},
+  checked: {},
   formControl: {
     margin: theme.spacing.unit,
   },
@@ -40,7 +52,7 @@ class Notification extends React.Component {
     return (
       <div className={classes.root}>
         <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Notifications</FormLabel>
+          <FormLabel className={classNames(classes.checked, classes.name)}  component="legend">Notifications</FormLabel>
           <RadioGroup
             aria-label="notification"
             name="notifications"
@@ -48,13 +60,13 @@ class Notification extends React.Component {
           >
             <FormControlLabel
               value="true"
-              control={<Radio />}
+              control={<Radio className={classNames(classes.radio, classes.checked, classes.label)} />}
               label="Get by email"
               onChange={ this.handleChange }
             />
             <FormControlLabel
               value=""
-              control={<Radio />}
+              control={<Radio className={classNames(classes.radio, classes.checked, classes.label)} />}
               label="Do Not Get"
               onChange={ this.handleChange }
             />
