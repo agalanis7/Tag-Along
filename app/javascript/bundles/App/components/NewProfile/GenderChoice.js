@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -7,55 +8,68 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import classNames from 'classnames';
+import green from '@material-ui/core/colors/green';
+
 
 
 const styles = theme => ({
   root: {
     display: 'flex',
   },
+  radio: {
+    color: green[600],
+  },
+  label: {
+    '&$checked': {
+      color: green[500],
+    },
+  },
+  checked: {},
   formControl: {
     margin: theme.spacing.unit,
   },
+
 });
 
-class Notification extends React.Component {
-  state = {
-    notification: false
-  };
-
-  handleChange = event => {
-    this.setState({ notification: event.target.value})
-    if (this.state.notification) {
-      this.props.handleNotificationChange(event.target.value)
+class GenderChoice extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ""
     }
-    console.log(`Inside the handleChange ${event.target.value}`)
-    //   if (value == "true") {
-    //     this.setState({ notification: true})
-    //     this.props.handleNotificationChange(this.state.notification)
-    //   }
-    };
+  }
+
+  handleChange = (event) => {
+    this.props.handleGenderChange(event)
+
+      console.log(`Event in handleChange is:\n ${event.target.value}`)
+
+  }
 
   render() {
     const { classes } = this.props;
+
     return (
       <div className={classes.root}>
+
         <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Notifications</FormLabel>
+          <FormLabel component="legend">Gender</FormLabel>
           <RadioGroup
             aria-label="notification"
-            name="notifications"
-            value={ this.state.notification }
+            name="genderChoice"
+            value={ this.props.gender }
           >
             <FormControlLabel
-              value="true"
-              control={<Radio />}
-              label="Get by email"
+              value="female"
+              control={<Radio className={classNames(classes.radio, classes.checked)} />}
+              label="Female"
               onChange={ this.handleChange }
+              className={  classes.label}
             />
             <FormControlLabel
-              value=""
+              value="male"
               control={<Radio />}
-              label="Do Not Get"
+              label="Male"
               onChange={ this.handleChange }
             />
           </RadioGroup>
@@ -66,4 +80,4 @@ class Notification extends React.Component {
 }
 
 
-export default withStyles(styles)(Notification)
+export default withStyles(styles)(GenderChoice);
