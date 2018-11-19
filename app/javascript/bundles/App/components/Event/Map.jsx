@@ -14,10 +14,10 @@ const styles = theme => ({
 })
 
  class Map extends Component {
-   constructor() {
+   constructor(props) {
      super()
      this.state = {
-       on: ["basketball", "baseball", "tennis", "golf", "biking", "volleyball"]
+       on: props.activities
      }
    }
 
@@ -68,7 +68,6 @@ const styles = theme => ({
      )
 
      map.on('load', (event) => {
-       this.fetchLocs()
 
       const icons = {
         basketball: "basketball",
@@ -88,8 +87,8 @@ const styles = theme => ({
       this.props.events.forEach((event) => {
         var eventType = event.properties.event_type
         console.log(event);
-        if(!this.map.getLayer(eventType)){
-          this.map.addLayer({
+        if(!map.getLayer(eventType)){
+          map.addLayer({
             id: eventType,
             type: "symbol",
             source: "events",
@@ -99,31 +98,28 @@ const styles = theme => ({
             },
             filter: ["==", "event_type", eventType]
           })
+          map.on('click', eventType, (e) => {
+            var coordinates = e.features[0].geometry.coordinates.slice()
+            var title = e.features[0].properties.title
+            var location = e.features[0].properties.location
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+            }
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(`<a href=${location}>${title}</a>`)
+                .addTo(map)
+          })
+          map.on('mouseenter', eventType, () => {
+            map.getCanvas().style.cursor = 'pointer'
+          })
+          map.on('mouseleave', eventType, () => {
+            map.getCanvas().style.cursor = ''
+          })
         }
       })
     })
   }
-
-      fetchLocs = () => {
-        const map = this.map;
-        this.props.events.forEach((event, i) => {
-          let elm = document.createElement('div')
-          elm.className = "markers"
-          let popup = new mapboxgl.Popup({ offset: 25 })
-          .setHTML(ReactDOMServer.renderToStaticMarkup(
-            <Popup events={event}></Popup>
-          ))
-          popup.on('open', (e) => {
-            document.getElementById(`event-btn`).addEventListener('click', function() {
-            Turbolinks.visit(`/events/${event.properties.id}`)
-            })
-          })
-          let marker = new mapboxgl.Marker(elm)
-          .setLngLat(event.geometry.coordinates)
-          .setPopup(popup)
-          marker.addTo(map)
-        })
-      }
 
    componentDidUpdate() {
      console.log(this.props.events)
@@ -156,7 +152,7 @@ const styles = theme => ({
      };
      return (
        <div>
-          <Paper style={{margin: 10, padding: 10}}>
+          <div style={{margin: 10, padding: 10, backgroundColor: 'blue'}}>
              <ul>
               <li onClick={ () => { this.toggleVisibility("basketball") } }>Basketball <span>{this.state.on.includes("basketball") ? "On" : "Off"}</span></li>
               <li onClick={ () => { this.toggleVisibility("biking") } }>Biking <span>{this.state.on.includes("biking") ? "On" : "Off"}</span></li>
@@ -165,7 +161,7 @@ const styles = theme => ({
               <li onClick={ () => { this.toggleVisibility("golf") } }>Golf <span>{this.state.on.includes("golf") ? "On" : "Off"}</span></li>
               <li onClick={ () => { this.toggleVisibility("volleyball") } }>Volleyball <span>{this.state.on.includes("volleyball") ? "On" : "Off"}</span></li>
              </ul>
-          </Paper>
+          </div>
 
           <div id="map" style={style} ref={el => this.mapContainer = el} />
        </div>

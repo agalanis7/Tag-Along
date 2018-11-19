@@ -21,8 +21,10 @@ class EventsController < ApplicationController
                            coordinates: [event.location.longitude, event.location.latitude]
                          },
                          properties: {
-                           id: event.id,
-                           event_type: event.location.location_type,
+                            id: event.id,
+                            title: event.title,
+                            location: "/events/#{event.id}",
+                            event_type: event.location.location_type,
                          }
                        }
                      end
