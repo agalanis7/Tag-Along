@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom';
 import Welcome from './Welcome/Welcome.jsx'
 import Info from './Welcome/Info.jsx'
-
+import 'typeface-roboto';
 
 
 

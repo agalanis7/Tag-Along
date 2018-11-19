@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
 import axios from 'axios'
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 
 const handleBack = () => {
   Turbolinks.visit('/events')
@@ -14,7 +19,35 @@ const headers = {
         'X-CSRF-TOKEN':     token
       }
 
+      const style = {
+      padding: '5px',
+      background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
+      borderRadius: 3,
+      border: 0,
+
+    };
+
+      const styles = theme => ({
+        root: {
+          flexGrow: 1,
+        },
+      cssRoot: {
+        background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
+        '&:hover': {
+          background: '#33691E',
+        },
+        color: 'white',
+        fontWeight: 'bold',
+      },
+      box: {
+        fontFamily: 'Roboto',
+        textAlign: 'center',
+      },
+    })
+
+
 class Event extends Component {
+
   constructor() {
     super()
   }
@@ -36,19 +69,29 @@ class Event extends Component {
   componentDidUpdate() {}
 
   render() {
+    const { classes } = this.props;
     const { user, event, activity, participants, profile } = this.props
     return (
       <div>
-        <div>
-          Host: {profile.first_name}, {profile.last_name}<hr/>
-        </div>
-        <div>
-          Activity: {activity.name}<hr/>
-        </div>
-        <div>
-          Description: {event.description}<hr/>
-        </div>
-        <div>
+        <Paper style={style} >
+        <Grid container className={classes.root} spacing={24} >
+         <Grid item xs={12} className={classes.box} >
+        <Paper>
+          Host: {profile.first_name}, {profile.last_name}
+        </Paper>
+         </Grid>
+         <Grid item xs={12} className={classes.box}>
+        <Paper>
+          Activity: {activity.name}
+      </Paper>
+      </Grid>
+      <Grid item xs={12} className={classes.box}>
+        <Paper>
+          Description: {event.description}
+      </Paper>
+      </Grid>
+      <Grid item xs={12} className={classes.box} >
+        <Paper>
           Participants:
           {
             participants.map((participant) => {
@@ -57,14 +100,20 @@ class Event extends Component {
               )
             })
 
-          }
-          <hr/>
+           }
+         </Paper>
+         </Grid>
+         <Grid item xs={12} className={classes.box} >
+           <Paper>
           <Button onClick={this.joinEvent}>JOIN</Button>
           <Button onClick={handleBack}>Back</Button>
-        </div>
+          </Paper>
+          </Grid>
+        </Grid>
+      </Paper>
       </div>
     )
   }
 }
 
-export default Event
+export default withStyles(styles)(Event);

@@ -4,14 +4,17 @@ import ReactDOMServer from 'react-dom/server'
 import axios from 'axios'
 import Popup from './Popup.jsx'
 import Grid from '@material-ui/core/Grid';
-import classNames from 'classnames';
 import Paper from '@material-ui/core/Paper';
+import green from '@material-ui/core/colors/green';
+import Button from '@material-ui/core/Button';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
-  root: {
+
+const style1 = {
     flexGrow: 1,
-  },
-})
+    color: 'red',
+  }
 
  class Map extends Component {
    constructor(props) {
@@ -152,15 +155,15 @@ const styles = theme => ({
      };
      return (
        <div>
-          <div style={{margin: 10, padding: 10, backgroundColor: 'blue'}}>
-             <ul>
-              <li onClick={ () => { this.toggleVisibility("basketball") } }>Basketball <span>{this.state.on.includes("basketball") ? "On" : "Off"}</span></li>
-              <li onClick={ () => { this.toggleVisibility("biking") } }>Biking <span>{this.state.on.includes("biking") ? "On" : "Off"}</span></li>
-              <li onClick={ () => { this.toggleVisibility("baseball") } }>Baseball <span>{this.state.on.includes("baseball") ? "On" : "Off"}</span></li>
-              <li onClick={ () => { this.toggleVisibility("tennis") } }>Tennis <span>{this.state.on.includes("tennis") ? "On" : "Off"}</span></li>
-              <li onClick={ () => { this.toggleVisibility("golf") } }>Golf <span>{this.state.on.includes("golf") ? "On" : "Off"}</span></li>
-              <li onClick={ () => { this.toggleVisibility("volleyball") } }>Volleyball <span>{this.state.on.includes("volleyball") ? "On" : "Off"}</span></li>
-             </ul>
+          <div style={style1}>
+             <div style={{textAlign:'center', direction:'column', padding:'10px' }}  >
+              <Button onClick={ () => { this.toggleVisibility("basketball") } } variant={ this.state.on.includes("basketball") ? "contained" : "outlined" } style={{marginBottom:'10px', marginRight:'11px'}}>Basketball</Button>
+              <Button onClick={ () => { this.toggleVisibility("biking") } } variant={ this.state.on.includes("biking") ? "contained" : "outlined" } style={{marginBottom:'10px'}}>Biking </Button>
+              <Button onClick={ () => { this.toggleVisibility("baseball") } } variant={ this.state.on.includes("baseball") ? "contained" : "outlined" } style={{marginBottom:'10px', marginRight:'5px'}}>Baseball</Button>
+              <Button onClick={ () => { this.toggleVisibility("tennis") } } variant={ this.state.on.includes("tennis") ? "contained" : "outlined" } style={{marginBottom:'10px', marginRight:'5px'}}>Tennis </Button>
+              <Button onClick={ () => { this.toggleVisibility("golf") } } variant={ this.state.on.includes("golf") ? "contained" : "outlined" } style={{marginBottom:'10px'}}>Golf </Button>
+              <Button onClick={ () => { this.toggleVisibility("volleyball") } } variant={ this.state.on.includes("volleyball") ? "contained" : "outlined" } style={{marginBottom:'10px'}}>Volleyball </Button>
+             </div>
           </div>
 
           <div id="map" style={style} ref={el => this.mapContainer = el} />
