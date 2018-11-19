@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 import Paper from '@material-ui/core/Paper';
 import sport from '../Images/sport.svg';
+import logo from '../Images/logo.png'
 
 const handleSignUp = () => {
   Turbolinks.visit('/users/sign_up')
@@ -21,6 +22,21 @@ const styles = theme => ({
   box: {
     textAlign: 'center',
   },
+  p1:{
+      fontFamily: 'Roboto',
+      textAlign: 'center',
+      color:'#33691E',
+      fontWeight:'bold',
+  },
+  p:{
+    textAlign: 'center',
+    fontFamily: 'Roboto',
+    color:'#33691E',
+    fontWeight:'bold',
+    height: '70px',
+    width: '320px',
+    justify:'center',
+  },
   button: {
     direction: 'row',
     justify: 'space-around',
@@ -32,13 +48,18 @@ const styles = theme => ({
     maxHeight: 190,
   },
   logo: {
-    height: 50,
+    height: 70,
     width: 320,
     textAlign: 'center',
     background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
     padding: theme.spacing.unit,
     color: 'white',
     fontWeight: 'bold',
+  },
+  logoImg: {
+    height: '80px',
+    width: '160px',
+
   },
   cssRoot: {
     background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
@@ -79,7 +100,7 @@ class Info extends Component {
       <Grid container className={classes.root} spacing={24}  alignItems={alignItems} direction={direction}
               justify={justify}>
         <Grid item sm={12}>
-            <Paper className={classes.logo}><div style={{ paddingTop: 10 }}>LOGO</div></Paper>
+            <Paper className={classes.logo}> <img src={logo} className={classes.logoImg} /></Paper>
         </Grid>
         <Grid item sm={12}>
            <div style={{ paddingTop: 50 }}>
@@ -87,12 +108,12 @@ class Info extends Component {
            </div>
       </Grid>
       <Grid item sm={12}>
-          <h3> THIS IN THE INFO </h3>
-          <p>Our is the most awesome!</p>
-          <p>Join Us!</p>
+
+          <p className={classes.p}>We believe in using technology to get people moving, doesn’t matter your sport or activity there’s always someone to tag alone with!</p>
+          <p className={classes.p1}>Join Us!</p>
       </Grid>
       <Grid item xs container direction="row" justify="space-around" spacing={16} style={{ paddingTop: 60 }}>
-         <Grid item sm={12} >
+         <Grid item sm={12} className={classes.box} >
            <Button className={classes.smBt} onClick={handleSignUp}>Skip</Button>
           </Grid>
           <Grid item sm={12}>

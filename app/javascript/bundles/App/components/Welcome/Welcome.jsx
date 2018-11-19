@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 import Paper from '@material-ui/core/Paper';
+import logo from '../Images/logo.png'
 
 
 const handleSignUp = () => {
@@ -18,6 +19,22 @@ const styles = theme => ({
   box: {
     textAlign: 'center',
   },
+  header:{
+      fontFamily: 'Roboto',
+  },
+  p:{
+    fontFamily: 'Roboto',
+    color:'#33691E',
+    fontWeight:'bold',
+    height: '70px',
+    width: '320px',
+    justify:'center',
+  },
+  logoImg: {
+    height: '80px',
+    width: '160px',
+
+  },
   img: {
     margin: 'auto',
     display: 'block',
@@ -29,13 +46,11 @@ const styles = theme => ({
     fontWeight: 'lighter',
   },
   logo: {
-    height: 50,
+    height: 70,
     width: 320,
     textAlign: 'center',
     background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
     padding: theme.spacing.unit,
-    color: 'white',
-    fontWeight: 'bold',
   },
   cssRoot: {
     background: 'linear-gradient(45deg, #B2FF59 30%, #8BC34A 90%)',
@@ -71,7 +86,11 @@ class Welcome extends Component {
     <Grid container className={classes.root} spacing={24}  alignItems={alignItems} direction={direction}
             justify={justify}>
       <Grid item sm={12}>
-       <Paper className={classes.logo}><div style={{ paddingTop: 10 }}>LOGO</div></Paper>
+       <Paper className={classes.logo}>
+
+             <img src={logo} className={classes.logoImg} />
+
+       </Paper>
       </Grid>
       <Grid item sm={12}>
       <div style={{ paddingTop: 50 }}>
@@ -79,9 +98,11 @@ class Welcome extends Component {
       </div>
     </Grid>
     <Grid item xs={12} className={classes.box} >
-      <h1>Welcome</h1>
-      <p>Some text here !</p>
-    </Grid>
+      <h1 className={classes.header}>Welcome!</h1>
+      <div className={classes.p} >
+      <p className={classes.header}>This app design to get you outdoors, active and at the same time creating new friendships!</p>
+      </div>
+  </Grid>
      <Grid item xs style={{ paddingTop: 40 }}>
        <Button className={classes.cssRoot} onClick={this.continue}>Get started</Button>
      </Grid>
