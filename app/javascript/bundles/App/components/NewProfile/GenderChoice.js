@@ -24,6 +24,9 @@ const styles = theme => ({
       color: green[500],
     },
   },
+  name: {
+      color: green[800],
+},
   checked: {},
   formControl: {
     margin: theme.spacing.unit,
@@ -53,7 +56,7 @@ class GenderChoice extends React.Component {
       <div className={classes.root}>
 
         <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Gender</FormLabel>
+          <FormLabel className={classNames(classes.checked, classes.name)} component="legend">Gender</FormLabel>
           <RadioGroup
             aria-label="notification"
             name="genderChoice"
@@ -61,14 +64,13 @@ class GenderChoice extends React.Component {
           >
             <FormControlLabel
               value="female"
-              control={<Radio className={classNames(classes.radio, classes.checked)} />}
+              control={<Radio className={classNames(classes.radio, classes.checked, classes.label)} />}
               label="Female"
               onChange={ this.handleChange }
-              className={  classes.label}
             />
             <FormControlLabel
               value="male"
-              control={<Radio />}
+              control={<Radio className={classNames(classes.radio, classes.checked, classes.label)} />}
               label="Male"
               onChange={ this.handleChange }
             />
