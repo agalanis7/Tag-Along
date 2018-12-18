@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import greeting from '../Images/greeting.svg';
+import greeting from "../Images/coedFootball.jpeg";
 import Info from './Info'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles';
@@ -98,9 +98,9 @@ class Welcome extends Component {
       </div>
     </Grid>
     <Grid item xs={12} className={classes.box} >
-      <h1 className={classes.header}>Welcome!</h1>
+      <h1 className={classes.header}>Team Sports</h1>
       <div className={classes.p} >
-      <p className={classes.header}>This app design to get you outdoors, active and at the same time creating new friendships!</p>
+      <p className={classes.header}>PickUp Sports</p>
       </div>
   </Grid>
      <Grid item xs style={{ paddingTop: 40 }}>
