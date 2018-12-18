@@ -38,8 +38,8 @@ const styles = theme => ({
   img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: 380,
-    maxHeight: 190,
+    maxWidth: 3800,
+    maxHeight: 1900,
   },
   link: {
     variant: 'outlined',
@@ -98,7 +98,7 @@ class Welcome extends Component {
       </div>
     </Grid>
     <Grid item xs={12} className={classes.box} >
-      <h1 className={classes.header}>Team Sports</h1>
+      <h1 className={classes.header}>Pickup Games</h1>
       <div className={classes.p} >
       <p className={classes.header}>PickUp Sports</p>
       </div>
