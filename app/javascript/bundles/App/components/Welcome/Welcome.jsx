@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import greeting from "../Images/coedFootball.jpeg";
+import greeting from "../Images/background.jpg";
 import Info from './Info'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles';
@@ -35,11 +35,16 @@ const styles = theme => ({
     width: '160px',
 
   },
+  
   img: {
     margin: 'auto',
     display: 'block',
-    maxWidth: 3800,
-    maxHeight: 1900,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: -1,
   },
   link: {
     variant: 'outlined',

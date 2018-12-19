@@ -4,7 +4,9 @@
 
 @media only screen and (max-width: 600px) {
   .welcome {
-    width: 100%;
+    width: 500%;
+   
+    }
   }
   * {
     text-align: center;
@@ -17,4 +19,6 @@
   img {
   padding-top: 2em;
   }
+
+  background-image: url('https://cdn.hipwallpaper.com/i/84/68/G46xbX.jpg')
 }
