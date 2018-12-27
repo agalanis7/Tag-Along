@@ -105,7 +105,7 @@ class Welcome extends Component {
     <Grid item xs={12} className={classes.box} >
       <h1 className={classes.header}>Pickup Sports</h1>
       <div className={classes.p} >
-      <p className={classes.header}></p>
+      <p className={classes.header}>Team Sports</p>
       </div>
   </Grid>
      <Grid item xs style={{ paddingTop: 40 }}>
