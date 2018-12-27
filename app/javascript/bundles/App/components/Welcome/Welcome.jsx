@@ -109,7 +109,7 @@ class Welcome extends Component {
       </div>
   </Grid>
      <Grid item xs style={{ paddingTop: 40 }}>
-       <Button className={classes.cssRoot} onClick={this.continue}>Start Here</Button>
+       <Button className={classes.cssRoot} onClick={this.continue}>Start</Button>
      </Grid>
      <Grid item xs style={{ paddingTop: 20 }}>
       <Button onClick={handleSignUp} className={classes.link}>Have an account? Log in</Button>
