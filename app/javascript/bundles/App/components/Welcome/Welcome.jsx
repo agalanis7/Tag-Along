@@ -103,7 +103,7 @@ class Welcome extends Component {
       </div>
     </Grid>
     <Grid item xs={12} className={classes.box} >
-      <h1 className={classes.header}>Pickup Sports</h1>
+      <h1 className={classes.header}>Team Sports</h1>
       <div className={classes.p} >
       <p className={classes.header}>Team Sports</p>
       </div>
