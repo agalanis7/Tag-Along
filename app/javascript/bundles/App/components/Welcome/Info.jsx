@@ -109,16 +109,14 @@ class Info extends Component {
       </Grid>
       <Grid item sm={12}>
 
-          <p className={classes.p}>We believe in using technology to get people moving, doesn’t matter your sport or activity there’s always someone to tag alone with!</p>
+          <p className={classes.p}>You can post a listing for a pickup game, or join a pickup game someone else has posted</p>
           <p className={classes.p1}>Join Us!</p>
       </Grid>
-      <Grid item xs container direction="row" justify="space-around" spacing={16} style={{ paddingTop: 60 }}>
-         <Grid item sm={12} className={classes.box} >
+      <Grid item xs container direction="row" justify="space-between" spacing={16} style={{ paddingTop: 60, paddingLeft: 20 }}>
+        <Grid item sm={12} className={classes.box} >
            <Button className={classes.smBt} onClick={handleSignUp}>Skip</Button>
-          </Grid>
-          <Grid item sm={12}>
            <Button onClick={handleSignUp} className={classes.cssRoot}>Sign up</Button>
-          </Grid>
+        </Grid>
       </Grid>
     </Grid>
    )

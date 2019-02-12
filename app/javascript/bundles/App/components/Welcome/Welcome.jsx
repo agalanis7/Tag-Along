@@ -21,10 +21,14 @@ const styles = theme => ({
   },
   header:{
       fontFamily: 'Roboto',
+      color: 'white',
+      fontStyle: 'italic',
+      
   },
   p:{
     fontFamily: 'Roboto',
-    color:'#33691E',
+    fontSize: 40,
+    color:'black',
     fontWeight:'bold',
     height: '70px',
     width: '320px',
@@ -49,6 +53,7 @@ const styles = theme => ({
   link: {
     variant: 'outlined',
     fontWeight: 'lighter',
+    color: '#b1b5b2',
   },
   logo: {
     height: 70,
@@ -64,6 +69,7 @@ const styles = theme => ({
     },
     color: 'white',
     fontWeight: 'bold',
+  
   },
   control: {
     padding: theme.spacing.unit * 2,
@@ -103,16 +109,16 @@ class Welcome extends Component {
       </div>
     </Grid>
     <Grid item xs={12} className={classes.box} >
-      <h1 className={classes.header}>Team Sports</h1>
+      <h1 className={classes.header}>Host and join pickup games</h1>
       <div className={classes.p} >
-      <p className={classes.header}>Team Sports</p>
+      {/* <p className={classes.header}>Team Sports</p> */}
       </div>
   </Grid>
      <Grid item xs style={{ paddingTop: 40 }}>
        <Button className={classes.cssRoot} onClick={this.continue}>Begin</Button>
      </Grid>
      <Grid item xs style={{ paddingTop: 20 }}>
-      <Button onClick={handleSignUp} className={classes.link}>Have an account? Log in</Button>
+      <Button onClick={handleSignUp} className={classes.link}>Have an account? <br/> Log in</Button>
      </Grid>
 
     </Grid>
